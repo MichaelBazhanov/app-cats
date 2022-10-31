@@ -10,10 +10,13 @@ module.exports = {
         blue: "#2196F3",
       },
       maxWidth: {
-        'max-w-screen-me': '1220%',
+        'screen-me': '1220px',
       },
       spacing: {
         '5.5': '1.375rem',
+      },
+      backgroundImage: {
+        'weeping-cat': "url('./img/WeepingCat.jpg')",
       }
     },
   },
