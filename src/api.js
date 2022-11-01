@@ -3,8 +3,10 @@ const api_key =
 
 export const serverGetCats = async (count) => {
   return fetch(`https://api.thecatapi.com/v1/images/search?limit=${count}`, {
+    method: "GET",
     headers: {
       "x-api-key": api_key,
+      "Content-Type": "application/json",
     },
   })
     .then((response) => {

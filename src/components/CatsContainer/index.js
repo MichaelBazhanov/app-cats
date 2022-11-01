@@ -1,24 +1,28 @@
 import Cats from "../Cats";
 import Button from "../Button";
 import Loading from "../Loading";
-import { serverGetCats } from "../../api";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { connect } from "react-redux";
 
-const CatsContainer = () => {
-  const [cats, setCats] = useState([]);
+import { getCats } from "../../modules/cats";
 
+const CatsContainer = ({ cats, isLoading, error, getCats }) => {
   useEffect(() => {
-    Promise.resolve()
-      .then(() => serverGetCats(15)) // 15
-      .then(({ success }) => setCats(success))
-      .catch(({ error }) =>
-        console.log("Критическая ошибка: " + error.message)
-      );
+    getCats(3); //15
   }, []);
 
   return (
     <div>
-      {cats.length === 0 && (
+      {error && (
+        <div className="flex flex-col justify-center items-center w-full height-vh">
+          <h2 className="text-3xl font-bold mb-5">
+            Sorry. Kitty's crying. There's been some kind of mistake.
+          </h2>
+          <Loading color="text-red-500" size="h-10 w-10" />
+        </div>
+      )}
+
+      {isLoading && (
         <div className="flex justify-center items-center w-full height-vh">
           <Loading color="text-blue" size="h-10 w-10" />
         </div>
@@ -37,4 +41,13 @@ const CatsContainer = () => {
   );
 };
 
-export default CatsContainer;
+export default connect(
+  (state) => ({
+    cats: state.catsReducer.cats,
+    isLoading: state.catsReducer.isLoading,
+    error: state.catsReducer.error,
+  }),
+  {
+    getCats,
+  }
+)(CatsContainer);
