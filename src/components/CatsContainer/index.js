@@ -1,5 +1,6 @@
 import Cats from "../Cats";
 import Button from "../Button";
+import Loading from "../Loading";
 import { serverGetCats } from "../../api";
 import { useEffect, useState } from "react";
 
@@ -17,11 +18,21 @@ const CatsContainer = () => {
 
   return (
     <div>
-      <div className="flex justify-center flex-wrap gap-12">
-        <Cats cats={cats} />
-      </div>
+      {cats.length === 0 && (
+        <div className="flex justify-center items-center w-full height-vh">
+          <Loading color="text-blue" size="h-10 w-10" />
+        </div>
+      )}
 
-      <Button className="mt-12 mb-8 mx-auto bg-blue rounded-md px-4 py-2 text-white whitespace-nowrap tracking-wide" />
+      {cats.length > 0 && (
+        <>
+          <div className="flex justify-center flex-wrap gap-12">
+            <Cats cats={cats} />
+          </div>
+
+          <Button className="mt-12 mb-8 mx-auto bg-blue rounded-md px-4 py-2 text-white whitespace-nowrap tracking-wide" />
+        </>
+      )}
     </div>
   );
 };

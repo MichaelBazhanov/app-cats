@@ -12,10 +12,13 @@
     @apply bg-white w-1 h-1;
   }
   html ::-webkit-scrollbar-thumb {
-    @apply rounded-sm bg-blue
+    @apply rounded-sm bg-blue;
   }
   .article-cats {
     @apply before:absolute hover:before:-inset-4 hover:before:p-4 before:hover:shadow-cat before:transition-all
     after:absolute after:-inset-4 after:top-full hover:after:top-36 after:bg-gradient-cat after:transition-all after:z-[1];
+  }
+  .height-vh {
+    height: calc(100vh - 68px - 48px);
   }
 }
