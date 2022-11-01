@@ -21,7 +21,7 @@ const CatsContainer = () => {
         <Cats cats={cats} />
       </div>
 
-      <Button className="mt-12 mb-8 mx-auto bg-blue rounded-md px-4 py-2 text-white whitespace-nowrap" />
+      <Button className="mt-12 mb-8 mx-auto bg-blue rounded-md px-4 py-2 text-white whitespace-nowrap tracking-wide" />
     </div>
   );
 };
