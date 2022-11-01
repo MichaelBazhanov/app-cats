@@ -25,10 +25,7 @@ const CatsContainer = () => {
             return (
               <article
                 key={id}
-                className="bg-gray-200 cursor-pointer relative
-								before:absolute hover:before:-inset-4 hover:before:p-4 before:hover:shadow-cat before:transition-all
-								after:absolute after:-inset-4 after:top-full hover:after:top-36 after:bg-gradient-cat after:transition-all after:z-[1]
-								"
+                className="bg-gray-200 relative article-cats"
               >
                 <img
                   src={url}
@@ -36,7 +33,7 @@ const CatsContainer = () => {
                   className="w-56 h-56 object-cover relative"
                 />
 
-                <Heart className="text-orange h-9.5 absolute z-[2] bottom-3 right-3 fill-slate-600" />
+                <Heart className="text-orange absolute z-[2] bottom-3 right-3 cursor-pointer" />
               </article>
             );
           })}
