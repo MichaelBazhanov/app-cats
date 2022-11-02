@@ -6,9 +6,9 @@ export const getCatsFavourites = (quantity) => ({
   type: GET_CATS_FAVOURITES,
   payload: { quantity },
 });
-export const catsFavouritesSuccess = (cats) => ({
+export const catsFavouritesSuccess = (catsFavourites) => ({
   type: CATS_FAVOURITES_SUCCESS,
-  payload: { cats },
+  payload: { catsFavourites },
 });
 export const catsFavouritesFailure = (error) => ({
   type: CATS_FAVOURITES_FAILURE,
