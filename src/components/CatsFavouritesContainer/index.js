@@ -4,12 +4,18 @@ import Loading from "../Loading";
 import { connect } from "react-redux";
 import React, { useEffect } from "react";
 
-import { getCats } from "../../modules/cats";
+import { getCatsFavorites } from "../../modules/catsFavorites";
 import { setCatFavorite } from "../../modules/catFavorite";
 
-const ContextCats = React.createContext(null); // Context API
+const ContextFavoritesCats = React.createContext(null); // Context API
 
-const CatsContainer = ({ cats, isLoading, error, getCats, setCatFavorite }) => {
+const CatsFavoritesContainer = ({
+  cats,
+  isLoading,
+  error,
+  getCats,
+  setCatFavorite,
+}) => {
   useEffect(() => {
     getCats(2); //15
   }, []);
@@ -44,7 +50,7 @@ const CatsContainer = ({ cats, isLoading, error, getCats, setCatFavorite }) => {
   );
 };
 
-export { ContextCats };
+export { ContextFavoritesCats };
 
 export default connect(
   (state) => ({
@@ -53,7 +59,7 @@ export default connect(
     error: state.catsReducer.error,
   }),
   {
-    getCats,
+    getCatsFavorites,
     setCatFavorite,
   }
-)(CatsContainer);
+)(CatsFavoritesContainer);

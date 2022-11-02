@@ -2,7 +2,7 @@ const api_key =
   "live_NULR4xgEwG1yoyOfQIGORjJhDhgZIWlpY48OFEpecOWv5VNX0lifb9cjVg1BKCvI";
 const user_id = "MichaelB33";
 
-// Получаем котов
+// Получаем котиков
 export const serverGetCats = async (count) => {
   return fetch(`https://api.thecatapi.com/v1/images/search?limit=${count}`, {
     method: "GET",

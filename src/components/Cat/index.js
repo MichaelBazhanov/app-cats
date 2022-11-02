@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { ContextCats } from "../CatsContainer";
+import { ContextFavoritesCats } from "../CatsFavouritesContainer";
 import Heart from "../Heart";
 
 const Cat = ({ id, url }) => {
   const { setCatFavorite } = useContext(ContextCats);
+  // const { setCatFavorite } = useContext(ContextFavoritesCats);
 
   return (
     <>
