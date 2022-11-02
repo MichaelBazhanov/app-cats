@@ -1,7 +1,9 @@
-const Button = ({ className }) => {
+const Button = ({ className, onClick }) => {
   return (
     <div className="flex">
-      <button className={`${className}`}>... загружаем еще котиков ...</button>
+      <button className={`${className}`} onClick={onClick}>
+        ... загружаем еще котиков ...
+      </button>
     </div>
   );
 };

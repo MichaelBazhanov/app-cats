@@ -3,12 +3,19 @@ import { useState } from "react";
 import HeartFill from "./HeartFill";
 import HeartStroke from "./HeartStroke";
 
-const Heart = ({ className }) => {
+const Heart = ({ className, setCatFavorite }) => {
   const [hookRef, hookValue] = useHover();
   const [active, setActive] = useState(false);
 
   return (
-    <div className={className} ref={hookRef} onClick={() => setActive(!active)}>
+    <div
+      className={className}
+      ref={hookRef}
+      onClick={() => {
+        setActive(!active);
+        if(!active) setCatFavorite()
+      }}
+    >
       {active ? (
         <HeartFill className="h-9.5" />
       ) : hookValue ? (

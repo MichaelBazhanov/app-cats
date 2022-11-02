@@ -3,11 +3,11 @@ import {
   applyMiddleware,
   compose,
 } from "redux";
-import rootReducer from "./rootReducers"; // он подхватит index.js а там экспорт по умолчанию
+import rootReducer from "./rootReducers";
 
 //Подключаем главную SAGA
 import createSagaMiddleware from "redux-saga";
-import { rootSaga } from "./rootSaga"; // rootSaga - главная сага в нее входят все саги
+import { rootSaga } from "./rootSaga";
 const sagaMiddleware = createSagaMiddleware();
 
 //redux-devtools
@@ -16,9 +16,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const CreateAppStore = () => {
   const store = createStore(
     rootReducer,
-    composeEnhancers(
-      applyMiddleware(sagaMiddleware) // в нее передаем кастомный middleware
-    )
+    composeEnhancers(applyMiddleware(sagaMiddleware))
   );
 
   sagaMiddleware.run(rootSaga);

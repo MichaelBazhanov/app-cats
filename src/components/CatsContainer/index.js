@@ -1,45 +1,49 @@
 import Cats from "../Cats";
 import Button from "../Button";
 import Loading from "../Loading";
-import { useEffect } from "react";
 import { connect } from "react-redux";
+import React, { useEffect } from "react";
 
 import { getCats } from "../../modules/cats";
+import { setCatFavorite } from "../../modules/catFavorite";
 
-const CatsContainer = ({ cats, isLoading, error, getCats }) => {
+const ContextCats = React.createContext(null); // Context API
+
+const CatsContainer = ({ cats, isLoading, error, getCats, setCatFavorite }) => {
   useEffect(() => {
-    getCats(3); //15
+    getCats(2); //15
   }, []);
 
   return (
     <div>
-      {error && (
-        <div className="flex flex-col justify-center items-center w-full height-vh">
-          <h2 className="text-3xl font-bold mb-5">
-            Sorry. Kitty's crying. There's been some kind of mistake.
-          </h2>
-          <Loading color="text-red-500" size="h-10 w-10" />
-        </div>
-      )}
-
-      {isLoading && (
-        <div className="flex justify-center items-center w-full height-vh">
-          <Loading color="text-blue" size="h-10 w-10" />
-        </div>
-      )}
-
-      {cats.length > 0 && (
-        <>
-          <div className="flex justify-center flex-wrap gap-12">
-            <Cats cats={cats} />
+      <ContextCats.Provider
+        value={{
+          setCatFavorite: setCatFavorite,
+        }}
+      >
+        {error && (
+          <div className="flex flex-col justify-center items-center w-full height-vh">
+            <h2 className="text-3xl font-bold mb-5">
+              Sorry. Kitty's crying. There's been some kind of mistake.
+            </h2>
+            <Loading color="text-red-500" size="h-10 w-10" />
           </div>
+        )}
 
-          <Button className="mt-12 mb-8 mx-auto bg-blue rounded-md px-4 py-2 text-white whitespace-nowrap tracking-wide" />
-        </>
-      )}
+        {isLoading && (
+          <div className="flex justify-center items-center w-full height-vh">
+            <Loading color="text-blue" size="h-10 w-10" />
+          </div>
+        )}
+
+        {!isLoading && cats.length > 0 && <Cats cats={cats} />}
+
+        <Button className="mt-12 mb-8 mx-auto bg-blue rounded-md px-4 py-2 text-white whitespace-nowrap tracking-wide" />
+      </ContextCats.Provider>
     </div>
   );
 };
+export { ContextCats };
 
 export default connect(
   (state) => ({
@@ -49,5 +53,6 @@ export default connect(
   }),
   {
     getCats,
+    setCatFavorite,
   }
 )(CatsContainer);
