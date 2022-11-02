@@ -23,7 +23,7 @@ export const serverGetCats = async (count) => {
     });
 };
 
-// Отправляем фаворитов котов
+// Отправляем фаворитов котиков
 export const serverSendCatFavourite = async (imageId) => {
   return fetch(`https://api.thecatapi.com/v1/favourites`, {
     method: "POST",
@@ -46,7 +46,7 @@ export const serverSendCatFavourite = async (imageId) => {
     });
 };
 
-// Получаем фаворитов котов
+// Получаем фаворитов котиков
 export const serverGetCatsFavourites = async (count) => {
   return fetch(
     `https://api.thecatapi.com/v1/favourites?limit=${count}&sub_id=${user_id}&order=DESC`,
@@ -58,6 +58,27 @@ export const serverGetCatsFavourites = async (count) => {
       },
     }
   )
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      return { success: data, error: null };
+    })
+    .catch(function (error) {
+      console.log(error);
+      return { success: null, error: error };
+    });
+};
+
+// Удаляем фаворитов котиков
+export const serverDeleteCatFavourite = async (favouriteId) => {
+  return fetch(`https://api.thecatapi.com/v1/favourites/${favouriteId}`, {
+    method: "DELETE",
+    headers: {
+      "x-api-key": api_key,
+      "Content-Type": "application/json",
+    },
+  })
     .then((response) => {
       return response.json();
     })
