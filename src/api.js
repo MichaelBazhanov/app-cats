@@ -24,7 +24,7 @@ export const serverGetCats = async (count) => {
 };
 
 // Отправляем фаворитов котов
-export const serverSendCatFavorite = async (imageId) => {
+export const serverSendCatFavourite = async (imageId) => {
   return fetch(`https://api.thecatapi.com/v1/favourites`, {
     method: "POST",
     body: JSON.stringify({
@@ -47,7 +47,7 @@ export const serverSendCatFavorite = async (imageId) => {
 };
 
 // Получаем фаворитов котов
-export const serverGetCatsFavorites = async (count) => {
+export const serverGetCatsFavourites = async (count) => {
   return fetch(
     `https://api.thecatapi.com/v1/favourites?limit=${count}&sub_id=${user_id}&order=DESC`,
     {

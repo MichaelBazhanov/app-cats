@@ -1,4 +1,4 @@
 export { default } from "./reducer";
 export * from "./actions";
 export * from "./selectors";
-export * from "./catFavoriteSaga";
+export * from "./catsFavouritesSaga";

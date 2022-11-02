@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 
 import { default as catsReducer } from "./modules/cats";
-import { default as catsFavoritesReducer } from "./modules/catsFavorites";
-import { default as catFavoriteReducer } from "./modules/catFavorite";
+import { default as catsFavouritesReducer } from "./modules/catsFavourites/reducer"; //me_error
+import { default as catFavouriteReducer } from "./modules/catFavourite";
 
 export default combineReducers({
   catsReducer,
-  catsFavoritesReducer,
-  catFavoriteReducer,
+  catsFavouritesReducer,
+  catFavouriteReducer,
 });

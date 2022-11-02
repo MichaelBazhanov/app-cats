@@ -1,30 +1,30 @@
 import Cats from "../Cats";
 import Button from "../Button";
 import Loading from "../Loading";
-import { connect } from "react-redux";
 import React, { useEffect } from "react";
+import { connect } from "react-redux";
 
-import { getCatsFavorites } from "../../modules/catsFavorites";
-import { setCatFavorite } from "../../modules/catFavorite";
+import { getCatsFavourites } from "../../modules/catsFavourites/actions"; //me_error
+import { setCatFavourite } from "../../modules/catFavourite";
 
-const ContextFavoritesCats = React.createContext(null); // Context API
+const ContextFavouritesCats = React.createContext(null);
 
-const CatsFavoritesContainer = ({
-  cats,
+const CatsFavouritesContainer = ({
+  catsFavourites,
   isLoading,
   error,
-  getCats,
-  setCatFavorite,
+  setCatFavourite,
+  getCatsFavourites,
 }) => {
   useEffect(() => {
-    getCats(2); //15
+    getCatsFavourites(2); //15
   }, []);
 
   return (
     <div>
-      <ContextCats.Provider
+      <ContextFavouritesCats.Provider
         value={{
-          setCatFavorite: setCatFavorite,
+          setCatFavourite: setCatFavourite,
         }}
       >
         {error && (
@@ -42,24 +42,26 @@ const CatsFavoritesContainer = ({
           </div>
         )}
 
-        {!isLoading && cats.length > 0 && <Cats cats={cats} />}
+        {!isLoading && catsFavourites.length > 0 && (
+          <Cats cats={catsFavourites} />
+        )}
 
         <Button className="mt-12 mb-8 mx-auto bg-blue rounded-md px-4 py-2 text-white whitespace-nowrap tracking-wide" />
-      </ContextCats.Provider>
+      </ContextFavouritesCats.Provider>
     </div>
   );
 };
 
-export { ContextFavoritesCats };
+export { ContextFavouritesCats };
 
 export default connect(
   (state) => ({
-    cats: state.catsReducer.cats,
-    isLoading: state.catsReducer.isLoading,
-    error: state.catsReducer.error,
+    catsFavourites: state.catsFavouritesReducer.catsFavourites,
+    isLoading: state.catsFavouritesReducer.isLoading,
+    error: state.catsFavouritesReducer.error,
   }),
   {
-    getCatsFavorites,
-    setCatFavorite,
+    getCatsFavourites,
+    setCatFavourite,
   }
-)(CatsFavoritesContainer);
+)(CatsFavouritesContainer);

@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { ContextCats } from "../CatsContainer";
-import { ContextFavoritesCats } from "../CatsFavouritesContainer";
+// import { ContextFavouritesCats } from "../CatsFavouritesContainer";
 import Heart from "../Heart";
 
 const Cat = ({ id, url }) => {
-  const { setCatFavorite } = useContext(ContextCats);
-  // const { setCatFavorite } = useContext(ContextFavoritesCats);
+  const { setCatFavourite } = useContext(ContextCats);
+  // const { setCatFavourite } = useContext(ContextFavouritesCats);
 
   return (
     <>
@@ -18,7 +18,7 @@ const Cat = ({ id, url }) => {
 
         <Heart
           className="text-orange absolute z-[2] bottom-3 right-3 cursor-pointer"
-          setCatFavorite={() => setCatFavorite(id)}
+          setCatFavourite={() => setCatFavourite(id)}
         />
       </article>
     </>

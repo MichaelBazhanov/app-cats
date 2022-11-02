@@ -1,20 +1,18 @@
-import { serverGetCatsFavorites, serverSendCatFavorite } from "../../api";
+import { serverGetCatsFavourites } from "../../api";
 import { call, put, takeEvery } from "redux-saga/effects";
 import {
-  GET_CATS_FAVORITES,
-  catsFavoritesSuccess,
-  catsFavoritesFailure,
+  GET_CATS_FAVOURITES,
+  catsFavouritesSuccess,
+  catsFavouritesFailure,
 } from "./actions";
 
-import { SET_CAT_FAVORITE, catFavoriteSuccess, catsFailure } from "./actions";
-
 //======================================================= ТЕСТИРОВАНИЕ
-export function* catsFavorites(action) {
+export function* catsFavourites(action) {
   try {
     const { quantity } = action.payload;
     console.log(quantity);
 
-    let { success } = yield call(serverGetCatsFavorites, quantity);
+    let { success } = yield call(serverGetCatsFavourites, quantity);
 
     if (success) {
       // перерабатываем данные у удобном для нас виде ======
@@ -23,16 +21,16 @@ export function* catsFavorites(action) {
       });
       // перерабатываем данные у удобном для нас виде ======
 
-      yield put(catsFavoritesSuccess(success));
+      yield put(catsFavouritesSuccess(success));
     } else {
-      yield put(catsFavoritesFailure(new Error("error").message));
+      yield put(catsFavouritesFailure(new Error("error").message));
     }
   } catch (error) {
-    yield put(catsFavoritesFailure(error.response));
+    yield put(catsFavouritesFailure(error.response));
   }
 }
 //======================================================= ТЕСТИРОВАНИЕ
-export function* catsFavoritesSaga() {
-  yield takeEvery(GET_CATS_FAVORITES, catsFavorites);
+export function* catsFavouritesSaga() {
+  yield takeEvery(GET_CATS_FAVOURITES, catsFavourites);
 }
 //====================================================================

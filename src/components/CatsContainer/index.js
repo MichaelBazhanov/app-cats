@@ -5,20 +5,20 @@ import { connect } from "react-redux";
 import React, { useEffect } from "react";
 
 import { getCats } from "../../modules/cats";
-import { setCatFavorite } from "../../modules/catFavorite";
+import { setCatFavourite } from "../../modules/catFavourite";
 
 const ContextCats = React.createContext(null); // Context API
 
-const CatsContainer = ({ cats, isLoading, error, getCats, setCatFavorite }) => {
+const CatsContainer = ({ cats, isLoading, error, getCats, setCatFavourite }) => {
   useEffect(() => {
-    getCats(2); //15
+    getCats(1); //15
   }, []);
 
   return (
     <div>
       <ContextCats.Provider
         value={{
-          setCatFavorite: setCatFavorite,
+          setCatFavourite: setCatFavourite,
         }}
       >
         {error && (
@@ -54,6 +54,6 @@ export default connect(
   }),
   {
     getCats,
-    setCatFavorite,
+    setCatFavourite,
   }
 )(CatsContainer);

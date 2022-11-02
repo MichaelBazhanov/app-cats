@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from './Layout'
 import AllKitties from './components/page/AllKitties'
-import FavoriteKitties from './components/page/FavoriteKitties'
+import FavouriteKitties from './components/page/FavoriteKitties'
 import NotFoundPage from './components/page/NotFoundPage'
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<AllKitties />} />
-        <Route path="favoritekitties" element={<FavoriteKitties />} />
+        <Route path="favouritekitties" element={<FavouriteKitties />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>

@@ -1,9 +1,9 @@
 import { all, fork } from "redux-saga/effects";
 
 import { catsSaga } from "./modules/cats";
-import { catsFavoritesSaga } from "./modules/catsFavorites";
-import { catFavoriteSaga } from "./modules/catFavorite";
+import { catsFavouritesSaga } from "./modules/catsFavourites/catsFavouritesSaga"; //me_error
+import { catFavouriteSaga } from "./modules/catFavourite";
 
 export function* rootSaga() {
-  yield all([fork(catsSaga), fork(catsFavoritesSaga), fork(catFavoriteSaga)]);
+  yield all([fork(catsSaga), fork(catsFavouritesSaga), fork(catFavouriteSaga)]);
 }

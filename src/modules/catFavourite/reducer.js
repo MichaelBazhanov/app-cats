@@ -1,31 +1,31 @@
 import {
-  SET_CAT_FAVORITE,
-  CAT_FAVORITE_SUCCESS,
-  CAT_FAVORITE_FAILURE,
+  SET_CAT_FAVOURITE,
+  CAT_FAVOURITE_SUCCESS,
+  CAT_FAVOURITE_FAILURE,
 } from "./actions";
 
 const initialState = {
-  catFavorite: [],
+  catFavourite: [],
   isLoading: false,
   error: null,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case SET_CAT_FAVORITE: {
+    case SET_CAT_FAVOURITE: {
       return {
         ...state,
         isLoading: true,
       };
     }
-    case CAT_FAVORITE_SUCCESS: {
+    case CAT_FAVOURITE_SUCCESS: {
       return {
         ...state,
-        catFavorite: [...state.catFavorite, action.payload.id],
+        catFavourite: [...state.catFavourite, action.payload.id],
         isLoading: false,
       };
     }
-    case CAT_FAVORITE_FAILURE: {
+    case CAT_FAVOURITE_FAILURE: {
       return {
         ...state,
         isLoading: false,

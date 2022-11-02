@@ -3,7 +3,7 @@ import { useState } from "react";
 import HeartFill from "./HeartFill";
 import HeartStroke from "./HeartStroke";
 
-const Heart = ({ className, setCatFavorite }) => {
+const Heart = ({ className, setCatFavourite }) => {
   const [hookRef, hookValue] = useHover();
   const [active, setActive] = useState(false);
 
@@ -13,7 +13,7 @@ const Heart = ({ className, setCatFavorite }) => {
       ref={hookRef}
       onClick={() => {
         setActive(!active);
-        if(!active) setCatFavorite()
+        if(!active) setCatFavourite()
       }}
     >
       {active ? (
