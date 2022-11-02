@@ -5,14 +5,12 @@ import { connect } from "react-redux";
 import React, { useEffect } from "react";
 
 import { getCats } from "../../modules/cats";
-import { setCatFavourite } from "../../modules/catFavourite";
 
 const CatsContainer = ({
   cats,
   isLoading,
   error,
   getCats,
-  setCatFavourite,
 }) => {
   useEffect(() => {
     getCats(1); //15
@@ -35,7 +33,7 @@ const CatsContainer = ({
         </div>
       )}
 
-      {!isLoading && cats.length > 0 && <Cats cats={cats} setCatFavourite={setCatFavourite} />}
+      {!isLoading && cats.length > 0 && <Cats cats={cats} />}
 
       <Button className="mt-12 mb-8 mx-auto bg-blue rounded-md px-4 py-2 text-white whitespace-nowrap tracking-wide" />
     </div>
@@ -51,6 +49,5 @@ export default connect(
   }),
   {
     getCats,
-    setCatFavourite,
   }
 )(CatsContainer);

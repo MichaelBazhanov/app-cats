@@ -21,7 +21,13 @@ export default function (state = initialState, action) {
     case CAT_FAVOURITE_SUCCESS: {
       return {
         ...state,
-        catFavourite: [...state.catFavourite, action.payload.id],
+        catFavourite: [
+          ...state.catFavourite,
+          {
+            catId: action.payload.catId,
+            favouriteId: action.payload.favouriteId,
+          },
+        ],
         isLoading: false,
       };
     }

@@ -3,10 +3,13 @@ import { useState } from "react";
 import HeartFill from "./HeartFill";
 import HeartStroke from "./HeartStroke";
 
-import { setCatFavourite } from "../../modules/catFavourite";
+import {
+  setCatFavourite,
+  deleteCatFavourite,
+} from "../../modules/catFavourite";
 import { connect } from "react-redux";
 
-const Heart = ({ className, id, setCatFavourite }) => {
+const Heart = ({ className, id, setCatFavourite, deleteCatFavourite }) => {
   const [hookRef, hookValue] = useHover();
   const [active, setActive] = useState(false);
 
@@ -16,7 +19,7 @@ const Heart = ({ className, id, setCatFavourite }) => {
       ref={hookRef}
       onClick={() => {
         setActive(!active);
-        if (!active) setCatFavourite(id);
+        active ? deleteCatFavourite(id) : setCatFavourite(id);
       }}
     >
       {active ? (
@@ -33,4 +36,5 @@ const Heart = ({ className, id, setCatFavourite }) => {
 // export default Heart;
 export default connect(null, {
   setCatFavourite,
+  deleteCatFavourite,
 })(Heart);
