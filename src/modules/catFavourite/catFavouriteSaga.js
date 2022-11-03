@@ -12,22 +12,36 @@ import {
   deleteCatFavouriteFailure,
 } from "./actions";
 
+const getFavouriteId = (state) => state.catFavouriteReducer.catFavourite;
+
 //======================================================= ТЕСТИРОВАНИЕ
-//Добавление фаворитов по клику просит CatId
 export function* catFavouriteAdd(action) {
-  console.log('catFavouriteSaga : catFavouriteAdd',action.payload);
+  // console.log("catFavouriteSaga : catFavouriteAdd", action.payload);
 
   try {
-    const { catId } = action.payload;
+    const { catId, favouriteId, image_id } = action.payload;
 
-    let {
-      success: { id },
-    } = yield call(serverSendCatFavourite, catId);
+    if (favouriteId) {
+      const {
+        success: { id: newFavouriteId },
+        error,
+      } = yield call(serverSendCatFavourite, image_id);
 
-    if (id) {
-      yield put(catFavouriteSuccess({ catId: catId, favouriteId: id })); // id image for id favourite
+      if (error) throw new Error();
+
+      yield put(
+        catFavouriteSuccess({ catId: image_id, favouriteId: newFavouriteId })
+      ); // id image for id favourite
     } else {
-      yield put(catFavouriteFailure(new Error("error").message));
+      let {
+        success: { id },
+      } = yield call(serverSendCatFavourite, catId);
+
+      if (id) {
+        yield put(catFavouriteSuccess({ catId: catId, favouriteId: id })); // id image for id favourite
+      } else {
+        yield put(catFavouriteFailure(new Error("error").message));
+      }
     }
   } catch (error) {
     yield put(catFavouriteFailure(error));
@@ -39,21 +53,50 @@ export function* catFavouriteSaga() {
 }
 //====================================================================
 
-const getFavouriteIdForRemoved = (state) =>
-  state.catFavouriteReducer.catFavourite;
-
 //======================================================= ТЕСТИРОВАНИЕ
 export function* catFavouriteDelete(action) {
-  console.log('catFavouriteSaga : catFavouriteDelete',action.payload);
+  // console.log("catFavouriteSaga : catFavouriteDelete", action.payload);
 
   try {
-    const { catId, favouriteId } = action.payload;
+    const { catId, favouriteId, image_id } = action.payload;
 
     if (favouriteId) {
-      yield call(serverDeleteCatFavourite, favouriteId); // ID фавориткого котика уже получен
+      const favouritesArray = yield select(getFavouriteId);
+      const favouriteArray = favouritesArray.filter(
+        (element) => element.catId === image_id
+      );
+
+      //first state
+      if (favouriteArray.length === 0) {
+        let { success, error } = yield call(
+          serverDeleteCatFavourite,
+          favouriteId
+        );
+
+        if (error) throw new Error();
+
+        yield put(deleteCatFavouriteSuccess());
+      }
+
+      // new state
+      if (favouriteArray.length === 1) {
+        const newFavouriteId =
+          favouriteId !== favouriteArray[0].favouriteId
+            ? favouriteArray[0].favouriteId
+            : favouriteId;
+
+        let { success, error } = yield call(
+          serverDeleteCatFavourite,
+          newFavouriteId
+        );
+
+        if (error) throw new Error();
+
+        yield put(deleteCatFavouriteSuccess({ catId: image_id }));
+      }
     } else {
-      // Получение ID котика для удаления ID фаворитного котика
-      const favouritesArray = yield select(getFavouriteIdForRemoved);
+      // Получение ID котика для удаления ID фаворитного котика или наоборот
+      const favouritesArray = yield select(getFavouriteId);
 
       // Перебираем данные и находим нужный id
       const favouriteArray = favouritesArray.filter(

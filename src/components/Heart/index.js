@@ -16,17 +16,17 @@ const Heart = ({
   deleteCatFavourite,
   activeHeart = null, // default
   favourite = null, // default
+  image_id = null, // default
 }) => {
   const [hookRef, hookValue] = useHover();
   const [active, setActive] = useState(false);
-
   useEffect(() => {
     if (activeHeart) setActive(true);
   }, [activeHeart]);
 
   const activeFavourite = () => {
     if (favourite) {
-      return { favouriteId: id };
+      return { favouriteId: id, image_id: image_id };
     } else {
       return { catId: id };
     }
@@ -38,7 +38,9 @@ const Heart = ({
       ref={hookRef}
       onClick={() => {
         setActive(!active);
-        active ? deleteCatFavourite(activeFavourite()) : setCatFavourite(activeFavourite());
+        active
+          ? deleteCatFavourite(activeFavourite())
+          : setCatFavourite(activeFavourite());
       }}
     >
       {active ? (

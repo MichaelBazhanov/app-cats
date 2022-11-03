@@ -1,6 +1,6 @@
 import Heart from "../Heart";
 
-const Cat = ({ id, url, activeHeart, favourite }) => {
+const Cat = ({ id, url, activeHeart, favourite, image_id }) => {
   return (
     <>
       <article key={id} className="bg-gray-200 relative article-cats">
@@ -15,6 +15,7 @@ const Cat = ({ id, url, activeHeart, favourite }) => {
           id={id}
           activeHeart={activeHeart}
           favourite={favourite}
+          image_id={image_id}
         />
       </article>
     </>

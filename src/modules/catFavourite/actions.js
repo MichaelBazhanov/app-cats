@@ -3,9 +3,9 @@ export const SET_CAT_FAVOURITE = "SET_CAT_FAVOURITE";
 export const CAT_FAVOURITE_SUCCESS = "CAT_FAVOURITE_SUCCESS";
 export const CAT_FAVOURITE_FAILURE = "CAT_FAVOURITE_FAILURE";
 
-export const setCatFavourite = (catId) => ({
+export const setCatFavourite = ({ catId, favouriteId, image_id }) => ({
   type: SET_CAT_FAVOURITE,
-  payload: { catId },
+  payload: { catId, favouriteId, image_id },
 });
 export const catFavouriteSuccess = ({ catId, favouriteId }) => ({
   type: CAT_FAVOURITE_SUCCESS,
@@ -21,9 +21,9 @@ export const DELETE_CAT_FAVOURITE = "DELETE_CAT_FAVOURITE";
 export const DELETE_CAT_FAVOURITE_SUCCESS = "DELETE_CAT_FAVOURITE_SUCCESS";
 export const DELETE_CAT_FAVOURITE_FAILURE = "DELETE_CAT_FAVOURITE_FAILURE";
 
-export const deleteCatFavourite = ({ catId, favouriteId }) => ({ // catId просто был !!!!!!!!!!!!!!!!!!!!!
+export const deleteCatFavourite = ({ catId, favouriteId, image_id }) => ({
   type: DELETE_CAT_FAVOURITE,
-  payload: { catId, favouriteId },
+  payload: { catId, favouriteId, image_id },
 });
 export const deleteCatFavouriteSuccess = (catId) => ({
   type: DELETE_CAT_FAVOURITE_SUCCESS,
