@@ -21,9 +21,9 @@ export const DELETE_CAT_FAVOURITE = "DELETE_CAT_FAVOURITE";
 export const DELETE_CAT_FAVOURITE_SUCCESS = "DELETE_CAT_FAVOURITE_SUCCESS";
 export const DELETE_CAT_FAVOURITE_FAILURE = "DELETE_CAT_FAVOURITE_FAILURE";
 
-export const deleteCatFavourite = (catId) => ({
+export const deleteCatFavourite = ({ catId, favouriteId }) => ({ // catId просто был !!!!!!!!!!!!!!!!!!!!!
   type: DELETE_CAT_FAVOURITE,
-  payload: { catId },
+  payload: { catId, favouriteId },
 });
 export const deleteCatFavouriteSuccess = (catId) => ({
   type: DELETE_CAT_FAVOURITE_SUCCESS,

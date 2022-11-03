@@ -15,6 +15,7 @@ const Heart = ({
   setCatFavourite,
   deleteCatFavourite,
   activeHeart = null, // default
+  favourite = null, // default
 }) => {
   const [hookRef, hookValue] = useHover();
   const [active, setActive] = useState(false);
@@ -23,13 +24,21 @@ const Heart = ({
     if (activeHeart) setActive(true);
   }, [activeHeart]);
 
+  const activeFavourite = () => {
+    if (favourite) {
+      return { favouriteId: id };
+    } else {
+      return { catId: id };
+    }
+  };
+
   return (
     <div
       className={className}
       ref={hookRef}
       onClick={() => {
         setActive(!active);
-        active ? deleteCatFavourite(id) : setCatFavourite(id);
+        active ? deleteCatFavourite(activeFavourite()) : setCatFavourite(activeFavourite());
       }}
     >
       {active ? (

@@ -13,7 +13,10 @@ import {
 } from "./actions";
 
 //======================================================= ТЕСТИРОВАНИЕ
-export function* catFavourite(action) {
+//Добавление фаворитов по клику просит CatId
+export function* catFavouriteAdd(action) {
+  console.log('catFavouriteSaga : catFavouriteAdd',action.payload);
+
   try {
     const { catId } = action.payload;
 
@@ -27,12 +30,12 @@ export function* catFavourite(action) {
       yield put(catFavouriteFailure(new Error("error").message));
     }
   } catch (error) {
-    yield put(catFavouriteFailure(error.response));
+    yield put(catFavouriteFailure(error));
   }
 }
 //======================================================= ТЕСТИРОВАНИЕ
 export function* catFavouriteSaga() {
-  yield takeEvery(SET_CAT_FAVOURITE, catFavourite);
+  yield takeEvery(SET_CAT_FAVOURITE, catFavouriteAdd);
 }
 //====================================================================
 
@@ -41,33 +44,35 @@ const getFavouriteIdForRemoved = (state) =>
 
 //======================================================= ТЕСТИРОВАНИЕ
 export function* catFavouriteDelete(action) {
+  console.log('catFavouriteSaga : catFavouriteDelete',action.payload);
+
   try {
-    const { catId } = action.payload;
+    const { catId, favouriteId } = action.payload;
 
-    // Получение ID котика для удаления ID фаворитного котика
-    const favouritesArray = yield select(getFavouriteIdForRemoved);
+    if (favouriteId) {
+      yield call(serverDeleteCatFavourite, favouriteId); // ID фавориткого котика уже получен
+    } else {
+      // Получение ID котика для удаления ID фаворитного котика
+      const favouritesArray = yield select(getFavouriteIdForRemoved);
 
-    // Перебираем данные и находим нужный id
-    const favouriteArray = favouritesArray.filter(
-      (element) => element.catId === catId
-    );
+      // Перебираем данные и находим нужный id
+      const favouriteArray = favouritesArray.filter(
+        (element) => element.catId === catId
+      );
 
-    console.log(catId);
-    console.log(favouriteArray);
+      if (favouriteArray.length !== 1) throw new Error();
 
-    // if (favouriteArray.length !== 1)
-    //   yield put(deleteCatFavouriteFailure(new Error("error").message));
+      const { error } = yield call(
+        serverDeleteCatFavourite,
+        favouriteArray[0].favouriteId
+      );
 
-    // let {
-    //   success: { message },
-    // } = yield call(serverDeleteCatFavourite, favouriteArray[0].favouriteId);
+      if (error) throw new Error();
 
-    // if (message !== "SUCCESS")
-    //   yield put(deleteCatFavouriteFailure(new Error("error").message));
-
-    // yield put(deleteCatFavouriteSuccess(catId));
+      yield put(deleteCatFavouriteSuccess(catId));
+    }
   } catch (error) {
-    yield put(deleteCatFavouriteFailure(error.response));
+    yield put(deleteCatFavouriteFailure(error.message));
   }
 }
 //======================================================= ТЕСТИРОВАНИЕ

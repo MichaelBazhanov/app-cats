@@ -13,14 +13,15 @@ export function* catsFavourites(action) {
 
     let { success } = yield call(serverGetCatsFavourites, quantity);
 
-    // перерабатываем данные у удобном для нас виде ======
-    success = success.map(({ id, image: { url } }) => {
-      return { id, url, activeHeart: true };
+    // перерабатываем данные в удобном для нас виде ======
+    const successForFavourites = success.map(({ id, image: { url } }) => {
+      return { id, url, activeHeart: true, favourite: true };
     });
-    // перерабатываем данные у удобном для нас виде ======
+    // перерабатываем данные в удобном для нас виде ======
 
     if (success) {
-      yield put(catsFavouritesSuccess(success));
+      yield put(catsFavouritesSuccess(successForFavourites));
+      /// тут новый вызов
     } else {
       yield put(catsFavouritesFailure(new Error("error").message));
     }
