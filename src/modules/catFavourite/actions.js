@@ -21,13 +21,13 @@ export const DELETE_CAT_FAVOURITE = "DELETE_CAT_FAVOURITE";
 export const DELETE_CAT_FAVOURITE_SUCCESS = "DELETE_CAT_FAVOURITE_SUCCESS";
 export const DELETE_CAT_FAVOURITE_FAILURE = "DELETE_CAT_FAVOURITE_FAILURE";
 
-export const deleteCatFavourite = (favouriteId) => ({
+export const deleteCatFavourite = (catId) => ({
   type: DELETE_CAT_FAVOURITE,
-  payload: { favouriteId },
+  payload: { catId },
 });
-export const deleteCatFavouriteSuccess = (id) => ({
+export const deleteCatFavouriteSuccess = (catId) => ({
   type: DELETE_CAT_FAVOURITE_SUCCESS,
-  payload: { id },
+  payload: { catId },
 });
 export const deleteCatFavouriteFailure = (error) => ({
   type: DELETE_CAT_FAVOURITE_FAILURE,

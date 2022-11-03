@@ -13,7 +13,7 @@ const CatsContainer = ({
   getCats,
 }) => {
   useEffect(() => {
-    getCats(1); //15
+    getCats(3); //15
   }, []);
 
   return (

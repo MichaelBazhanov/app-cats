@@ -1,5 +1,5 @@
 import { serverSendCatFavourite, serverDeleteCatFavourite } from "../../api";
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, put, select, takeEvery } from "redux-saga/effects";
 
 import {
   SET_CAT_FAVOURITE,
@@ -36,20 +36,35 @@ export function* catFavouriteSaga() {
 }
 //====================================================================
 
+const getFavouriteIdForRemoved = (state) =>
+  state.catFavouriteReducer.catFavourite;
+
 //======================================================= ТЕСТИРОВАНИЕ
 export function* catFavouriteDelete(action) {
   try {
-    const { favouriteId } = action.payload;
+    const { catId } = action.payload;
 
-    let a = yield call(serverDeleteCatFavourite, favouriteId);
-    console.log('delete ====', a);
-    // if (id) {
-    //   yield put(deleteCatFavouriteSuccess(id));
-    // } else {
-    //   yield put(deleteCatFavouriteFailure(new Error("error").message));
-    // }
+    // Получение ID котика для удаления ID фаворитного котика
+    const favouritesArray = yield select(getFavouriteIdForRemoved);
+
+    // Перебираем данные и находим нужный id
+    const favouriteArray = favouritesArray.filter(
+      (element) => element.catId === catId
+    );
+
+    if (favouriteArray.length !== 1)
+      yield put(deleteCatFavouriteFailure(new Error("error").message));
+
+    let {
+      success: { message },
+    } = yield call(serverDeleteCatFavourite, favouriteArray[0].favouriteId);
+
+    if (message !== "SUCCESS")
+      yield put(deleteCatFavouriteFailure(new Error("error").message));
+
+    yield put(deleteCatFavouriteSuccess(catId));
   } catch (error) {
-    // yield put(deleteCatFavouriteFailure(error.response));
+    yield put(deleteCatFavouriteFailure(error.response));
   }
 }
 //======================================================= ТЕСТИРОВАНИЕ
