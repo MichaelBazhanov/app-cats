@@ -25,7 +25,7 @@ export const deleteCatFavourite = ({ catId, favouriteId, image_id }) => ({
   type: DELETE_CAT_FAVOURITE,
   payload: { catId, favouriteId, image_id },
 });
-export const deleteCatFavouriteSuccess = (catId) => ({
+export const deleteCatFavouriteSuccess = ({ catId }) => ({
   type: DELETE_CAT_FAVOURITE_SUCCESS,
   payload: { catId },
 });

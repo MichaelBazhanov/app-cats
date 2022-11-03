@@ -44,6 +44,7 @@ export function* catFavouriteAdd(action) {
       }
     }
   } catch (error) {
+    console.log(error);
     yield put(catFavouriteFailure(error));
   }
 }
@@ -73,9 +74,9 @@ export function* catFavouriteDelete(action) {
           favouriteId
         );
 
-        if (error) throw new Error();
+        if (error) throw new Error().message;
 
-        yield put(deleteCatFavouriteSuccess());
+        yield put(deleteCatFavouriteSuccess({ catId: "" }));
       }
 
       // new state
@@ -90,7 +91,7 @@ export function* catFavouriteDelete(action) {
           newFavouriteId
         );
 
-        if (error) throw new Error();
+        if (error) throw new Error().message;
 
         yield put(deleteCatFavouriteSuccess({ catId: image_id }));
       }
@@ -112,9 +113,10 @@ export function* catFavouriteDelete(action) {
 
       if (error) throw new Error();
 
-      yield put(deleteCatFavouriteSuccess(catId));
+      yield put(deleteCatFavouriteSuccess({ catId: catId }));
     }
   } catch (error) {
+    console.log(error);
     yield put(deleteCatFavouriteFailure(error.message));
   }
 }
