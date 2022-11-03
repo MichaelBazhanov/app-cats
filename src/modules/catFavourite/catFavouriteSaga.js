@@ -52,17 +52,20 @@ export function* catFavouriteDelete(action) {
       (element) => element.catId === catId
     );
 
-    if (favouriteArray.length !== 1)
-      yield put(deleteCatFavouriteFailure(new Error("error").message));
+    console.log(catId);
+    console.log(favouriteArray);
 
-    let {
-      success: { message },
-    } = yield call(serverDeleteCatFavourite, favouriteArray[0].favouriteId);
+    // if (favouriteArray.length !== 1)
+    //   yield put(deleteCatFavouriteFailure(new Error("error").message));
 
-    if (message !== "SUCCESS")
-      yield put(deleteCatFavouriteFailure(new Error("error").message));
+    // let {
+    //   success: { message },
+    // } = yield call(serverDeleteCatFavourite, favouriteArray[0].favouriteId);
 
-    yield put(deleteCatFavouriteSuccess(catId));
+    // if (message !== "SUCCESS")
+    //   yield put(deleteCatFavouriteFailure(new Error("error").message));
+
+    // yield put(deleteCatFavouriteSuccess(catId));
   } catch (error) {
     yield put(deleteCatFavouriteFailure(error.response));
   }

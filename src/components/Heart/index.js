@@ -1,5 +1,5 @@
 import { useHover } from "../../utils/hooks/hover";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HeartFill from "./HeartFill";
 import HeartStroke from "./HeartStroke";
 
@@ -9,9 +9,19 @@ import {
 } from "../../modules/catFavourite";
 import { connect } from "react-redux";
 
-const Heart = ({ className, id, setCatFavourite, deleteCatFavourite }) => {
+const Heart = ({
+  className,
+  id,
+  setCatFavourite,
+  deleteCatFavourite,
+  activeHeart = null, // default
+}) => {
   const [hookRef, hookValue] = useHover();
   const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    if (activeHeart) setActive(true);
+  }, [activeHeart]);
 
   return (
     <div

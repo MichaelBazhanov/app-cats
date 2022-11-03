@@ -15,7 +15,7 @@ export function* catsFavourites(action) {
 
     // перерабатываем данные у удобном для нас виде ======
     success = success.map(({ id, image: { url } }) => {
-      return { id, url };
+      return { id, url, activeHeart: true };
     });
     // перерабатываем данные у удобном для нас виде ======
 
