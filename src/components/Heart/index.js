@@ -2,7 +2,7 @@ import { useHover } from "../../utils/hooks/hover";
 import { useEffect, useState } from "react";
 import HeartFill from "./HeartFill";
 import HeartStroke from "./HeartStroke";
-
+import classNames from "classnames";
 import {
   setCatFavourite,
   deleteCatFavourite,
@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 const Heart = ({
   className,
   id,
+  isLoading,
   setCatFavourite,
   deleteCatFavourite,
   activeHeart = null, // default
@@ -20,6 +21,7 @@ const Heart = ({
 }) => {
   const [hookRef, hookValue] = useHover();
   const [active, setActive] = useState(false);
+
   useEffect(() => {
     if (activeHeart) setActive(true);
   }, [activeHeart]);
@@ -37,25 +39,44 @@ const Heart = ({
       className={className}
       ref={hookRef}
       onClick={() => {
-        setActive(!active);
-        active
-          ? deleteCatFavourite(activeFavourite())
-          : setCatFavourite(activeFavourite());
+        if (!isLoading) {
+          setActive(!active);
+          active
+            ? deleteCatFavourite(activeFavourite())
+            : setCatFavourite(activeFavourite());
+        }
       }}
     >
       {active ? (
-        <HeartFill className="h-9.5" />
+        <HeartFill
+          className={classNames("h-9.5", {
+            "opacity-50 pointer-events-none": isLoading,
+          })}
+        />
       ) : hookValue ? (
-        <HeartFill className="h-9.5" />
+        <HeartFill
+          className={classNames("h-9.5", {
+            "opacity-50 pointer-events-none": isLoading,
+          })}
+        />
       ) : (
-        <HeartStroke className="h-9.5" />
+        <HeartStroke
+          className={classNames("h-9.5", {
+            "opacity-50 pointer-events-none": isLoading,
+          })}
+        />
       )}
     </div>
   );
 };
 
 // export default Heart;
-export default connect(null, {
-  setCatFavourite,
-  deleteCatFavourite,
-})(Heart);
+export default connect(
+  (state) => ({
+    isLoading: state.catFavouriteReducer.isLoading,
+  }),
+  {
+    setCatFavourite,
+    deleteCatFavourite,
+  }
+)(Heart);

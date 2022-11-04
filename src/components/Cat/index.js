@@ -3,7 +3,7 @@ import Heart from "../Heart";
 const Cat = ({ id, url, activeHeart, favourite, image_id }) => {
   return (
     <>
-      <article key={id} className="bg-gray-200 relative article-cats">
+      <article key={id} className="bg-gray-200 relative group article-cats">
         <img
           src={url}
           alt={`${id}-cat`}
@@ -11,7 +11,7 @@ const Cat = ({ id, url, activeHeart, favourite, image_id }) => {
         />
 
         <Heart
-          className="text-orange absolute z-[2] bottom-3 right-3 cursor-pointer"
+          className="text-orange absolute z-[2] bottom-3 right-3 cursor-pointer hidden group-hover:block"
           id={id}
           activeHeart={activeHeart}
           favourite={favourite}
