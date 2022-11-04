@@ -53,7 +53,7 @@ export default function (state = initialState, action) {
       );
       return {
         ...state,
-        catFavourite: favouriteArray,
+        catFavourite: [...favouriteArray],
         isLoading: false,
       };
     }
