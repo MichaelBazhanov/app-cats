@@ -11,6 +11,7 @@ import {
   deleteCatFavouriteSuccess,
   deleteCatFavouriteFailure,
 } from "./actions";
+import { showNotification } from "../tooltips"; // success or warning or error
 
 const getFavouriteId = (state) => state.catFavouriteReducer.catFavourite;
 
@@ -32,6 +33,12 @@ export function* catFavouriteAdd(action) {
       yield put(
         catFavouriteSuccess({ catId: image_id, favouriteId: newFavouriteId })
       ); // id image for id favourite
+      yield put(
+        showNotification({
+          type: "success",
+          text: "The pet has been added to favourites.", //Pet was removed from favourites
+        })
+      );
     } else {
       let {
         success: { id },
@@ -39,13 +46,31 @@ export function* catFavouriteAdd(action) {
 
       if (id) {
         yield put(catFavouriteSuccess({ catId: catId, favouriteId: id })); // id image for id favourite
+        yield put(
+          showNotification({
+            type: "success",
+            text: "The pet has been added to favourites.", //Pet was removed from favourites
+          })
+        );
       } else {
         yield put(catFavouriteFailure(new Error("error").message));
+        yield put(
+          showNotification({
+            type: "warning",
+            text: "Strange data from the server.",
+          })
+        );
       }
     }
   } catch (error) {
     console.log(error);
     yield put(catFavouriteFailure(error));
+    yield put(
+      showNotification({
+        type: "error",
+        text: "I'm sorry, but there's been some kind of mistake.",
+      })
+    );
   }
 }
 //======================================================= ТЕСТИРОВАНИЕ
@@ -77,6 +102,12 @@ export function* catFavouriteDelete(action) {
         if (error) throw new Error().message;
 
         yield put(deleteCatFavouriteSuccess({ catId: "" }));
+        yield put(
+          showNotification({
+            type: "success",
+            text: "Pet was removed from favourites.", // The pet has been added to favourites
+          })
+        );
       }
 
       // new state
@@ -94,12 +125,16 @@ export function* catFavouriteDelete(action) {
         if (error) throw new Error().message;
 
         yield put(deleteCatFavouriteSuccess({ catId: image_id }));
+        yield put(
+          showNotification({
+            type: "success",
+            text: "Pet was removed from favourites.", // The pet has been added to favourites
+          })
+        );
       }
     } else {
-      // Получение ID котика для удаления ID фаворитного котика или наоборот
       const favouritesArray = yield select(getFavouriteId);
 
-      // Перебираем данные и находим нужный id
       const favouriteArray = favouritesArray.filter(
         (element) => element.catId === catId
       );
@@ -114,10 +149,22 @@ export function* catFavouriteDelete(action) {
       if (error) throw new Error();
 
       yield put(deleteCatFavouriteSuccess({ catId: catId }));
+      yield put(
+        showNotification({
+          type: "success",
+          text: "Pet was removed from favourites.", // The pet has been added to favourites
+        })
+      );
     }
   } catch (error) {
     console.log(error);
     yield put(deleteCatFavouriteFailure(error.message));
+    yield put(
+      showNotification({
+        type: "error",
+        text: "I'm sorry, but there's been some kind of mistake.",
+      })
+    );
   }
 }
 //======================================================= ТЕСТИРОВАНИЕ

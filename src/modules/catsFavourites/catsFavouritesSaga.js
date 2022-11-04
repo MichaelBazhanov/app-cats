@@ -23,11 +23,11 @@ export function* catsFavourites(action) {
 
     if (success) {
       yield put(catsFavouritesSuccess(successForFavourites));
-      /// тут новый вызов
     } else {
       yield put(catsFavouritesFailure(new Error("error").message));
     }
   } catch (error) {
+    console.log(error)
     yield put(catsFavouritesFailure(error.response));
   }
 }

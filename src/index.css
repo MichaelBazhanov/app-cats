@@ -21,4 +21,13 @@
   .height-vh {
     height: calc(100vh - 68px - 48px);
   }
+  .success {
+    @apply bg-green-500;
+  }
+  .warning {
+    @apply bg-yellow-300;
+  }
+  .error {
+    @apply bg-red-600;
+  }
 }

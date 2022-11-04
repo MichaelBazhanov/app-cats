@@ -20,6 +20,7 @@ export function* cats(action) {
       yield put(catsFailure(new Error("error").message));
     }
   } catch (error) {
+    console.log(error)
     yield put(catsFailure(error.response));
   }
 }

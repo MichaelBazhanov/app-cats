@@ -6,6 +6,7 @@ import {
   catFavouriteSaga,
   deleteCatFavouriteSaga,
 } from "./modules/catFavourite";
+import { tooltipsSaga } from "./modules/tooltips";
 
 export function* rootSaga() {
   yield all([
@@ -13,5 +14,6 @@ export function* rootSaga() {
     fork(catsFavouritesSaga),
     fork(deleteCatFavouriteSaga),
     fork(catFavouriteSaga),
+    fork(tooltipsSaga),
   ]);
 }
