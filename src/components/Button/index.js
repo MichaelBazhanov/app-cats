@@ -1,9 +1,20 @@
 import PropTypes from "prop-types";
 
-const Button = ({ className, onClick }) => {
+const Button = ({
+  className,
+  numberFavouriteCats = () => {},
+  getCatsFavourites = () => {},
+  getCats = () => {},
+  disabled,
+}) => {
+  const handler = () => {
+    numberFavouriteCats();
+    getCatsFavourites();
+    getCats();
+  };
   return (
     <div className="flex">
-      <button className={`${className}`} onClick={onClick}>
+      <button className={`${className}`} onClick={handler} disabled={disabled}>
         ... загружаем еще котиков ...
       </button>
     </div>
@@ -11,8 +22,11 @@ const Button = ({ className, onClick }) => {
 };
 
 Button.propTypes = {
-  onClick: PropTypes.func,
+  numberFavouriteCats: PropTypes.func,
+  getCatsFavourites: PropTypes.func,
+  getCats: PropTypes.func,
   className: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 export default Button;

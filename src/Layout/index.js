@@ -14,7 +14,7 @@ const Layout = ({
   hideNotification,
 }) => {
   return (
-    <div className="antialiased font-sans relative min-w-[320px]">
+    <div className="antialiased font-sans relative min-w-[320px] grid auto-cols-fr grid-rows-[auto_1fr_auto] h-screen">
       <Header />
 
       <main>

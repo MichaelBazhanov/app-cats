@@ -16,6 +16,7 @@ module.exports = {
       spacing: {
         5.5: "1.375rem",
         9.5: "2.375rem",
+        29: "7.25rem",
       },
       backgroundImage: {
         "weeping-cat": "url('./img/WeepingCat.jpg')",
@@ -26,6 +27,9 @@ module.exports = {
         nav: "0px 4px 4px rgba(0, 0, 0, 0.24)",
         cat: "0px 6px 5px rgba(0, 0, 0, 0.24), 0px 9px 18px rgba(0, 0, 0, 0.18)",
       },
+      minHeight: {
+        'cat': '14rem',
+      }
     },
   },
   plugins: [],

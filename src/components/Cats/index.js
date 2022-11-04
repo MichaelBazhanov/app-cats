@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const Cats = ({ cats }) => {
   return (
-    <div className="flex justify-center flex-wrap gap-12">
+    <div className="flex justify-center md:justify-start flex-wrap gap-12">
       {cats &&
         cats.map(
           (

@@ -5,7 +5,7 @@ const FavouriteKitties = () => {
     <>
       <h1 className="sr-only">Favourite Kitties</h1>
       <section>
-        <div className="max-w-screen-me mx-auto px-6 mt-12">
+        <div className="max-w-screen-me mx-auto px-6 mt-29">
           <CatsFavouritesContainer />
         </div>
       </section>

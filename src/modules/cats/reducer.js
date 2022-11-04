@@ -17,7 +17,7 @@ export default function (state = initialState, action) {
     case CATS_SUCCESS: {
       return {
         ...state,
-        cats: action.payload.cats,
+        cats: [...state.cats, ...action.payload.cats],
         isLoading: false,
       };
     }

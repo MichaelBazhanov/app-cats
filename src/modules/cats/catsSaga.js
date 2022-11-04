@@ -9,11 +9,9 @@ export function* cats(action) {
     let { success } = yield call(serverGetCats, quantity);
 
     if (success) {
-      // перерабатываем данные у удобном для нас виде ======
       success = success.map(({ id, url }) => {
         return { id, url };
       });
-      // перерабатываем данные у удобном для нас виде ======
 
       yield put(catsSuccess(success));
     } else {
