@@ -70,7 +70,6 @@ const Heart = ({
   );
 };
 
-// export default Heart;
 export default connect(
   (state) => ({
     isLoading: state.catFavouriteReducer.isLoading,
