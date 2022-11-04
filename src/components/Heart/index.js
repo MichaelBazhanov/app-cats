@@ -3,11 +3,6 @@ import { useEffect, useState } from "react";
 import HeartFill from "./HeartFill";
 import HeartStroke from "./HeartStroke";
 import classNames from "classnames";
-import {
-  setCatFavourite,
-  deleteCatFavourite,
-} from "../../modules/catFavourite";
-import { connect } from "react-redux";
 
 const Heart = ({
   className,
@@ -70,12 +65,4 @@ const Heart = ({
   );
 };
 
-export default connect(
-  (state) => ({
-    isLoading: state.catFavouriteReducer.isLoading,
-  }),
-  {
-    setCatFavourite,
-    deleteCatFavourite,
-  }
-)(Heart);
+export default Heart;

@@ -1,4 +1,4 @@
-import Heart from "../Heart";
+import HeartContainer from "../HeartContainer";
 
 const Cat = ({ id, url, activeHeart, favourite, image_id }) => {
   return (
@@ -10,7 +10,7 @@ const Cat = ({ id, url, activeHeart, favourite, image_id }) => {
           className="w-56 h-56 object-cover relative"
         />
 
-        <Heart
+        <HeartContainer
           className="text-orange absolute z-[2] bottom-3 right-3 cursor-pointer hidden group-hover:block"
           id={id}
           activeHeart={activeHeart}
