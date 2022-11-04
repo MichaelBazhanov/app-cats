@@ -3,6 +3,7 @@ import { useHover } from "../../utils/hooks/hover";
 import HeartFill from "./HeartFill";
 import HeartStroke from "./HeartStroke";
 import classNames from "classnames";
+import PropTypes from "prop-types";
 
 const Heart = ({
   className,
@@ -63,6 +64,17 @@ const Heart = ({
       )}
     </div>
   );
+};
+
+Heart.propTypes = {
+  className: PropTypes.string,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  isLoading: PropTypes.bool,
+  setCatFavourite: PropTypes.func,
+  deleteCatFavourite: PropTypes.func,
+  activeHeart: PropTypes.bool,
+  favourite: PropTypes.bool,
+  image_id: PropTypes.string,
 };
 
 export default Heart;

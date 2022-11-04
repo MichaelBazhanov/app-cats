@@ -3,15 +3,11 @@ import Button from "../Button";
 import Loading from "../Loading";
 import { connect } from "react-redux";
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 
 import { getCats } from "../../modules/cats";
 
-const CatsContainer = ({
-  cats,
-  isLoading,
-  error,
-  getCats,
-}) => {
+let CatsContainer = ({ cats, isLoading, error, getCats }) => {
   useEffect(() => {
     getCats(3); //15
   }, []);
@@ -40,8 +36,14 @@ const CatsContainer = ({
   );
 };
 
+CatsContainer.propTypes = {
+  cats: PropTypes.array,
+  isLoading: PropTypes.bool,
+  error: PropTypes.string,
+  getCats: PropTypes.func,
+};
 
-export default connect(
+CatsContainer = connect(
   (state) => ({
     cats: state.catsReducer.cats,
     isLoading: state.catsReducer.isLoading,
@@ -51,3 +53,5 @@ export default connect(
     getCats,
   }
 )(CatsContainer);
+
+export default CatsContainer;

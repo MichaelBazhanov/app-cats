@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const HeartStroke = ({ className }) => {
   return (
     <svg
@@ -12,6 +14,10 @@ const HeartStroke = ({ className }) => {
       />
     </svg>
   );
+};
+
+HeartStroke.propTypes = {
+  className: PropTypes.string,
 };
 
 export default HeartStroke;

@@ -3,10 +3,11 @@ import Button from "../Button";
 import Loading from "../Loading";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-import { getCatsFavourites } from "../../modules/catsFavourites/actions"; //me_error
+import { getCatsFavourites } from "../../modules/catsFavourites";
 
-const CatsFavouritesContainer = ({
+let CatsFavouritesContainer = ({
   catsFavourites,
   isLoading,
   error,
@@ -42,7 +43,14 @@ const CatsFavouritesContainer = ({
   );
 };
 
-export default connect(
+CatsFavouritesContainer.propTypes = {
+  catsFavourites: PropTypes.array,
+  isLoading: PropTypes.bool,
+  error: PropTypes.string,
+  getCatsFavourites: PropTypes.func,
+};
+
+CatsFavouritesContainer = connect(
   (state) => ({
     catsFavourites: state.catsFavouritesReducer.catsFavourites,
     isLoading: state.catsFavouritesReducer.isLoading,
@@ -52,3 +60,5 @@ export default connect(
     getCatsFavourites,
   }
 )(CatsFavouritesContainer);
+
+export default CatsFavouritesContainer;

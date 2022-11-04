@@ -4,8 +4,9 @@ import {
   deleteCatFavourite,
 } from "../../modules/catFavourite";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-const HeartContainer = ({
+let HeartContainer = ({
   className,
   id,
   isLoading,
@@ -29,7 +30,18 @@ const HeartContainer = ({
   );
 };
 
-export default connect(
+HeartContainer.propTypes = {
+  className: PropTypes.string,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  isLoading: PropTypes.bool,
+  setCatFavourite: PropTypes.func,
+  deleteCatFavourite: PropTypes.func,
+  activeHeart: PropTypes.bool,
+  favourite: PropTypes.bool,
+  image_id: PropTypes.string,
+};
+
+HeartContainer = connect(
   (state) => ({
     isLoading: state.catFavouriteReducer.isLoading,
   }),
@@ -38,3 +50,5 @@ export default connect(
     deleteCatFavourite,
   }
 )(HeartContainer);
+
+export default HeartContainer;

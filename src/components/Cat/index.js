@@ -1,4 +1,5 @@
 import HeartContainer from "../HeartContainer";
+import PropTypes from "prop-types";
 
 const Cat = ({ id, url, activeHeart, favourite, image_id }) => {
   return (
@@ -20,6 +21,14 @@ const Cat = ({ id, url, activeHeart, favourite, image_id }) => {
       </article>
     </>
   );
+};
+
+Cat.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  url: PropTypes.string,
+  activeHeart: PropTypes.bool,
+  favourite: PropTypes.bool,
+  image_id: PropTypes.string,
 };
 
 export default Cat;

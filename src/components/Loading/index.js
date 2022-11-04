@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const Loading = ({ color, size }) => {
   return (
     <div className="flex justify-center items-center">
@@ -22,6 +24,11 @@ const Loading = ({ color, size }) => {
       </svg>
     </div>
   );
+};
+
+Loading.propTypes = {
+  color: PropTypes.string,
+  size: PropTypes.string,
 };
 
 export default Loading;

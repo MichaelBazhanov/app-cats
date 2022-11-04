@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useMatch } from "react-router-dom";
 import classNames from "classnames";
+import PropTypes from "prop-types";
 
 const LinkCustom = ({ children, to, ...props }) => {
   const match = useMatch({
@@ -24,6 +25,12 @@ const LinkCustom = ({ children, to, ...props }) => {
       {children}
     </Link>
   );
+};
+
+LinkCustom.propTypes = {
+  children: PropTypes.elementType.isRequired,
+  to: PropTypes.string.isRequired,
+  props: PropTypes.object,
 };
 
 export default LinkCustom;

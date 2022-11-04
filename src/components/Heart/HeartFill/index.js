@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const HeartFill = ({ className }) => {
   return (
     <svg
@@ -12,6 +14,10 @@ const HeartFill = ({ className }) => {
       />
     </svg>
   );
+};
+
+HeartFill.propTypes = {
+  className: PropTypes.string,
 };
 
 export default HeartFill;

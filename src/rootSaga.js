@@ -1,7 +1,7 @@
 import { all, fork } from "redux-saga/effects";
 
 import { catsSaga } from "./modules/cats";
-import { catsFavouritesSaga } from "./modules/catsFavourites/catsFavouritesSaga"; //me_error
+import { catsFavouritesSaga } from "./modules/catsFavourites";
 import {
   catFavouriteSaga,
   deleteCatFavouriteSaga,

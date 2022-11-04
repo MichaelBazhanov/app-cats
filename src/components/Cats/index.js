@@ -1,4 +1,5 @@
 import Cat from "../Cat";
+import PropTypes from "prop-types";
 
 const Cats = ({ cats }) => {
   return (
@@ -27,6 +28,10 @@ const Cats = ({ cats }) => {
         )}
     </div>
   );
+};
+
+Cats.propTypes = {
+  Cats: PropTypes.array,
 };
 
 export default Cats;
