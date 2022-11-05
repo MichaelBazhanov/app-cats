@@ -72,7 +72,7 @@ export const serverGetCatsFavourites = async (count) => {
 
 // Удаляем фаворитов котиков
 export const serverDeleteCatFavourite = async (favouriteId) => {
-  return fetch(`https://api.thecatapi.com/v1/favourites/${favouriteId}`, {
+  return await fetch(`https://api.thecatapi.com/v1/favourites/${favouriteId}`, {
     method: "DELETE",
     headers: {
       "x-api-key": api_key,

@@ -13,7 +13,9 @@ let CatsContainer = ({ cats, isLoading, error, getCats }) => {
   const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
-    getCats(firstLoadedCutsNumber); //15
+    if (cats.length === 0) { // Первая загрузка и далее уже дозагрузка по кнопке
+      getCats(firstLoadedCutsNumber); // 15
+    }
     setShowButton(true);
   }, []);
 

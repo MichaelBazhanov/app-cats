@@ -3,13 +3,14 @@ export const SET_CAT_FAVOURITE = "SET_CAT_FAVOURITE";
 export const CAT_FAVOURITE_SUCCESS = "CAT_FAVOURITE_SUCCESS";
 export const CAT_FAVOURITE_FAILURE = "CAT_FAVOURITE_FAILURE";
 
+// SET
 export const setCatFavourite = ({ catId, favouriteId, image_id }) => ({
   type: SET_CAT_FAVOURITE,
   payload: { catId, favouriteId, image_id },
 });
-export const catFavouriteSuccess = ({ catId, favouriteId }) => ({
+export const catFavouriteSuccess = ({ catId, favouriteId, activeFavourite }) => ({
   type: CAT_FAVOURITE_SUCCESS,
-  payload: { catId, favouriteId },
+  payload: { catId, favouriteId, activeFavourite },
 });
 export const catFavouriteFailure = (error) => ({
   type: CAT_FAVOURITE_FAILURE,
@@ -25,11 +26,29 @@ export const deleteCatFavourite = ({ catId, favouriteId, image_id }) => ({
   type: DELETE_CAT_FAVOURITE,
   payload: { catId, favouriteId, image_id },
 });
-export const deleteCatFavouriteSuccess = ({ catId }) => ({
+export const deleteCatFavouriteSuccess = ({ data }) => ({
   type: DELETE_CAT_FAVOURITE_SUCCESS,
-  payload: { catId },
+  payload: { data },
 });
 export const deleteCatFavouriteFailure = (error) => ({
   type: DELETE_CAT_FAVOURITE_FAILURE,
+  payload: { error },
+});
+
+// UPDATE
+export const UPDATE_CAT_FAVOURITE = "UPDATE_CAT_FAVOURITE";
+export const UPDATE_CAT_FAVOURITE_SUCCESS = "UPDATE_CAT_FAVOURITE_SUCCESS";
+export const UPDATE_CAT_FAVOURITE_FAILURE = "UPDATE_CAT_FAVOURITE_FAILURE";
+
+export const updateCatFavourite = ({ favouriteId }) => ({
+  type: UPDATE_CAT_FAVOURITE,
+  payload: { favouriteId },
+});
+export const updateCatFavouriteSuccess = ({ data }) => ({
+  type: UPDATE_CAT_FAVOURITE_SUCCESS,
+  payload: { data },
+});
+export const updateCatFavouriteFailure = (error) => ({
+  type: UPDATE_CAT_FAVOURITE_FAILURE,
   payload: { error },
 });
