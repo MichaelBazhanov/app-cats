@@ -34,21 +34,3 @@ export const deleteCatFavouriteFailure = (error) => ({
   type: DELETE_CAT_FAVOURITE_FAILURE,
   payload: { error },
 });
-
-// UPDATE
-export const UPDATE_CAT_FAVOURITE = "UPDATE_CAT_FAVOURITE";
-export const UPDATE_CAT_FAVOURITE_SUCCESS = "UPDATE_CAT_FAVOURITE_SUCCESS";
-export const UPDATE_CAT_FAVOURITE_FAILURE = "UPDATE_CAT_FAVOURITE_FAILURE";
-
-export const updateCatFavourite = ({ favouriteId }) => ({
-  type: UPDATE_CAT_FAVOURITE,
-  payload: { favouriteId },
-});
-export const updateCatFavouriteSuccess = ({ data }) => ({
-  type: UPDATE_CAT_FAVOURITE_SUCCESS,
-  payload: { data },
-});
-export const updateCatFavouriteFailure = (error) => ({
-  type: UPDATE_CAT_FAVOURITE_FAILURE,
-  payload: { error },
-});

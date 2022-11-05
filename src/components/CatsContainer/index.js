@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 import { getCats } from "../../modules/cats";
 
-let CatsContainer = ({ cats, isLoading, error, getCats }) => {
+let CatsContainer = ({ cats, isLoading, error, getCats, catFavourite }) => {
   const firstLoadedCutsNumber = 3;
 
   const [showButton, setShowButton] = useState(false);
@@ -17,7 +17,19 @@ let CatsContainer = ({ cats, isLoading, error, getCats }) => {
       getCats(firstLoadedCutsNumber); // 15
     }
     setShowButton(true);
+    console.log(catFavourite)
   }, []);
+
+  // const filteredСats = () => {
+  //   console.log(cats)
+  //    let a = cats.map((e) => {
+  //     if (!e.activeFavourite) {
+  //       return e
+  //     }
+  //   })
+  //   console.log(a)
+  //   return  a
+  // }
 
   return (
     <>
@@ -60,6 +72,7 @@ let CatsContainer = ({ cats, isLoading, error, getCats }) => {
 
 CatsContainer.propTypes = {
   cats: PropTypes.array,
+  catFavourite: PropTypes.array,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
   getCats: PropTypes.func,
@@ -70,6 +83,7 @@ CatsContainer = connect(
     cats: state.catsReducer.cats,
     isLoading: state.catsReducer.isLoading,
     error: state.catsReducer.error,
+    catFavourite: state.catFavouriteReducer.catFavourite,
   }),
   {
     getCats,
