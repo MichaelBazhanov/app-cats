@@ -106,14 +106,13 @@ export function* catFavouriteDelete(action) {
 
       if (catFavourite.length > 0) { // Если я свой id нашел в массиве
         catFavouriteFilter = catFavouriteReducer.map((e) => {
-          if(e.catId === catId) {
+          if(e.catId === (catId || image_id)) {
             return {catId: e.catId, favouriteId: favouriteId, activeFavourite: false}
           } else {
             return {catId: e.catId, favouriteId: e.favouriteId, activeFavourite: e.activeFavourite}
           }
         })
       } else { // Если я свой id НЕ нашел в массиве
-        console.log('пустой массив 123')
         catFavouriteFilter = [...catFavouriteReducer, { catId: image_id, favouriteId, activeFavourite: false }];
       }
 
