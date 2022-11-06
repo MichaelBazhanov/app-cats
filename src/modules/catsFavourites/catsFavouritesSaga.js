@@ -13,13 +13,11 @@ export function* catsFavourites(action) {
 
     let { success } = yield call(serverGetCatsFavourites, quantity);
 
-    // перерабатываем данные в удобном для нас виде ======
     const successForFavourites = success.map(
       ({ id, image: { url }, image: { id: image_id } }) => {
         return { id, url, activeHeart: true, favourite: true, image_id };
       }
     );
-    // перерабатываем данные в удобном для нас виде ======
 
     if (success) {
       yield put(catsFavouritesSuccess(successForFavourites));

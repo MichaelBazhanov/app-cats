@@ -1,18 +1,16 @@
 import { serverSendCatFavourite, serverDeleteCatFavourite } from "../../api";
 import { call, put, select, takeEvery } from "redux-saga/effects";
-
 import {
   SET_CAT_VISITED,
   catVisitedSuccess,
   catVisitedFailure,
-} from "./actions";
-import {
   DELETE_CAT_VISITED,
   deleteCatVisitedSuccess,
   deleteCatVisitedFailure,
 } from "./actions";
 import { updateCatFavourite } from "../catsFavourites";
 import { showNotification } from "../tooltips"; // success or warning or error
+import filtredToArray from '../../utils/helpers/filtredToArray'
 
 const getFavouriteId = (state) => state.catsVisitedReducer.catFavourite;
 
