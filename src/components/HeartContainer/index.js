@@ -43,7 +43,7 @@ HeartContainer.propTypes = {
 
 HeartContainer = connect(
   (state) => ({
-    isLoading: state.catFavouriteReducer.isLoading,
+    isLoading: state.catsVisitedReducer.isLoading,
   }),
   {
     setCatFavourite,

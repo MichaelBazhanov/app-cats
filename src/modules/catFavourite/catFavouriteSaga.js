@@ -14,7 +14,7 @@ import {
 import { updateCatFavourite } from "../catsFavourites";
 import { showNotification } from "../tooltips"; // success or warning or error
 
-const getFavouriteId = (state) => state.catFavouriteReducer.catFavourite;
+const getFavouriteId = (state) => state.catsVisitedReducer.catFavourite;
 
 //======================================================= ТЕСТИРОВАНИЕ
 export function* catFavouriteAdd(action) {
@@ -106,15 +106,15 @@ export function* catFavouriteDelete(action) {
     if (favouriteId) {
       let catFavouriteFilter = [];
 
-      const catFavouriteReducer = yield select(getFavouriteId);
+      const catsVisitedReducer = yield select(getFavouriteId);
 
-      const catFavourite = catFavouriteReducer.filter(
+      const catFavourite = catsVisitedReducer.filter(
         (element) => element.catId === image_id
       );
 
       if (catFavourite.length > 0) {
         // Если я свой id нашел в массиве
-        catFavouriteFilter = catFavouriteReducer.map((e) => {
+        catFavouriteFilter = catsVisitedReducer.map((e) => {
           if (e.catId === (catId || image_id)) {
             return {
               catId: e.catId,
@@ -132,7 +132,7 @@ export function* catFavouriteDelete(action) {
       } else {
         // Если я свой id НЕ нашел в массиве
         catFavouriteFilter = [
-          ...catFavouriteReducer,
+          ...catsVisitedReducer,
           { catId: image_id, favouriteId, activeFavourite: false },
         ];
       }
@@ -152,9 +152,9 @@ export function* catFavouriteDelete(action) {
         })
       );
     } else {
-      const catFavouriteReducer = yield select(getFavouriteId);
+      const catsVisitedReducer = yield select(getFavouriteId);
 
-      const catFavourite = catFavouriteReducer.filter(
+      const catFavourite = catsVisitedReducer.filter(
         (element) => element.catId === catId
       );
 
@@ -173,7 +173,7 @@ export function* catFavouriteDelete(action) {
 
       if (error) throw new Error();
 
-      const catFavouriteFilter = catFavouriteReducer.map((e) => {
+      const catFavouriteFilter = catsVisitedReducer.map((e) => {
         if (e.catId === catId) {
           return {
             catId: e.catId,

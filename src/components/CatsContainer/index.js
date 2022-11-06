@@ -87,7 +87,7 @@ CatsContainer = connect(
     cats: state.catsReducer.cats,
     isLoading: state.catsReducer.isLoading,
     error: state.catsReducer.error,
-    catsVisited: state.catFavouriteReducer.catFavourite,
+    catsVisited: state.catsVisitedReducer.catFavourite,
   }),
   {
     getCats,
