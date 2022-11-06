@@ -1,6 +1,8 @@
 import Cats from "../Cats";
 import Button from "../Button";
 import Loading from "../Loading";
+import Error from "../Error";
+import CatsNo from "../CatsNo";
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
@@ -17,7 +19,7 @@ const filtered = ({ cats, catsVisited }) => {
 };
 
 let CatsContainer = ({ cats, isLoading, error, getCats, catsVisited }) => {
-  const firstLoadedCutsNumber = 3;
+  const firstLoadedCutsNumber = 6;
 
   const [showButton, setShowButton] = useState(false);
 
@@ -38,27 +40,15 @@ let CatsContainer = ({ cats, isLoading, error, getCats, catsVisited }) => {
   return (
     <>
       {error && (
-        <div className="flex flex-col w-full">
-          <h2 className="text-3xl font-bold mb-5 text-center">
-            Sorry. Kitty's crying. There's been some kind of mistake.
-          </h2>
-          <div className="h-80 w-90 bg-weeping-cat bg-no-repeat bg-contain bg-center"></div>
-        </div>
+        <Error>Sorry. Kitty's crying. There's been some kind of mistake.</Error>
       )}
 
-      {!error && isLoading && (
-        <div className="flex justify-center items-center w-full fixed z-10 inset-0 bg-black bg-opacity-30">
-          <Loading color="text-blue" size="h-10 w-10" />
-        </div>
-      )}
+      {!error && isLoading && <Loading color="text-blue" size="h-10 w-10" />}
 
       {!error && !isLoading && filteredСats.length === 0 && (
-        <div>
-          <h2 className="mx-auto font-bold text-2xl text-center">
-            Sorry you ran out of kitties. Try downloading some more.
-          </h2>
-          <div className="h-80 w-90 bg-weeping-cat bg-no-repeat bg-contain bg-center"></div>
-        </div>
+        <CatsNo>
+          Sorry you ran out of kitties. Try downloading some more.
+        </CatsNo>
       )}
 
       {!error && filteredСats.length > 0 && <Cats cats={filteredСats} />}
