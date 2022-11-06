@@ -1,8 +1,8 @@
 import Heart from "../Heart";
 import {
-  setCatFavourite,
-  deleteCatFavourite,
-} from "../../modules/catFavourite";
+  setCatVisited,
+  deleteCatVisited,
+} from "../../modules/catsVisited";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -10,8 +10,8 @@ let HeartContainer = ({
   className,
   id,
   isLoading,
-  setCatFavourite,
-  deleteCatFavourite,
+  setCatVisited,
+  deleteCatVisited,
   activeHeart,
   favourite,
   image_id,
@@ -24,8 +24,8 @@ let HeartContainer = ({
       favourite={favourite}
       image_id={image_id}
       isLoading={isLoading}
-      setCatFavourite={setCatFavourite}
-      deleteCatFavourite={deleteCatFavourite}
+      setCatVisited={setCatVisited}
+      deleteCatVisited={deleteCatVisited}
     />
   );
 };
@@ -34,8 +34,8 @@ HeartContainer.propTypes = {
   className: PropTypes.string,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   isLoading: PropTypes.bool,
-  setCatFavourite: PropTypes.func,
-  deleteCatFavourite: PropTypes.func,
+  setCatVisited: PropTypes.func,
+  deleteCatVisited: PropTypes.func,
   activeHeart: PropTypes.bool,
   favourite: PropTypes.bool,
   image_id: PropTypes.string,
@@ -46,8 +46,8 @@ HeartContainer = connect(
     isLoading: state.catsVisitedReducer.isLoading,
   }),
   {
-    setCatFavourite,
-    deleteCatFavourite,
+    setCatVisited,
+    deleteCatVisited,
   }
 )(HeartContainer);
 

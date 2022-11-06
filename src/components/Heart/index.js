@@ -9,8 +9,8 @@ const Heart = ({
   className,
   id,
   isLoading,
-  setCatFavourite,
-  deleteCatFavourite,
+  setCatVisited,
+  deleteCatVisited,
   activeHeart = null, // default
   favourite = null, // default
   image_id = null, // default
@@ -38,8 +38,8 @@ const Heart = ({
         if (!isLoading) {
           setActive(!active);
           active
-            ? deleteCatFavourite(activeFavourite())
-            : setCatFavourite(activeFavourite());
+            ? deleteCatVisited(activeFavourite())
+            : setCatVisited(activeFavourite());
         }
       }}
     >
@@ -70,8 +70,8 @@ Heart.propTypes = {
   className: PropTypes.string,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   isLoading: PropTypes.bool,
-  setCatFavourite: PropTypes.func,
-  deleteCatFavourite: PropTypes.func,
+  setCatVisited: PropTypes.func,
+  deleteCatVisited: PropTypes.func,
   activeHeart: PropTypes.bool,
   favourite: PropTypes.bool,
   image_id: PropTypes.string,

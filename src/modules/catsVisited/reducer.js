@@ -1,10 +1,10 @@
 import {
-  SET_CAT_FAVOURITE,
-  CAT_FAVOURITE_SUCCESS,
-  CAT_FAVOURITE_FAILURE,
-  DELETE_CAT_FAVOURITE,
-  DELETE_CAT_FAVOURITE_SUCCESS,
-  DELETE_CAT_FAVOURITE_FAILURE,
+  SET_CAT_VISITED,
+  CAT_VISITED_SUCCESS,
+  CAT_VISITED_FAILURE,
+  DELETE_CAT_VISITED,
+  DELETE_CAT_VISITED_SUCCESS,
+  DELETE_CAT_VISITED_FAILURE,
 } from "./actions";
 
 const initialState = {
@@ -15,13 +15,13 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case SET_CAT_FAVOURITE: {
+    case SET_CAT_VISITED: {
       return {
         ...state,
         isLoading: true,
       };
     }
-    case CAT_FAVOURITE_SUCCESS: {
+    case CAT_VISITED_SUCCESS: {
 
       const {catId, favouriteId, activeFavourite} = action.payload;
       let catFavourite = [...state.catFavourite];
@@ -49,28 +49,27 @@ export default function (state = initialState, action) {
         isLoading: false,
       };
     }
-    case CAT_FAVOURITE_FAILURE: {
+    case CAT_VISITED_FAILURE: {
       return {
         ...state,
         isLoading: false,
         error: action.payload.error,
       };
     }
-
-    case DELETE_CAT_FAVOURITE: {
+    case DELETE_CAT_VISITED: {
       return {
         ...state,
         isLoading: true,
       };
     }
-    case DELETE_CAT_FAVOURITE_SUCCESS: {
+    case DELETE_CAT_VISITED_SUCCESS: {
       return {
         ...state,
         catFavourite: action.payload.data,
         isLoading: false,
       };
     }
-    case DELETE_CAT_FAVOURITE_FAILURE: {
+    case DELETE_CAT_VISITED_FAILURE: {
       return {
         ...state,
         isLoading: false,

@@ -2,14 +2,14 @@ import { serverSendCatFavourite, serverDeleteCatFavourite } from "../../api";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 
 import {
-  SET_CAT_FAVOURITE,
-  catFavouriteSuccess,
-  catFavouriteFailure,
+  SET_CAT_VISITED,
+  catVisitedSuccess,
+  catVisitedFailure,
 } from "./actions";
 import {
-  DELETE_CAT_FAVOURITE,
-  deleteCatFavouriteSuccess,
-  deleteCatFavouriteFailure,
+  DELETE_CAT_VISITED,
+  deleteCatVisitedSuccess,
+  deleteCatVisitedFailure,
 } from "./actions";
 import { updateCatFavourite } from "../catsFavourites";
 import { showNotification } from "../tooltips"; // success or warning or error
@@ -17,7 +17,7 @@ import { showNotification } from "../tooltips"; // success or warning or error
 const getFavouriteId = (state) => state.catsVisitedReducer.catFavourite;
 
 //======================================================= ТЕСТИРОВАНИЕ
-export function* catFavouriteAdd(action) {
+export function* catVisitedAdd(action) {
   // console.log("catFavouriteSaga : catFavouriteAdd", action.payload);
 
   try {
@@ -38,7 +38,7 @@ export function* catFavouriteAdd(action) {
       );
 
       yield put(
-        catFavouriteSuccess({
+        catVisitedSuccess({
           catId: image_id,
           favouriteId: newFavouriteId,
           activeFavourite: true,
@@ -57,7 +57,7 @@ export function* catFavouriteAdd(action) {
 
       if (id) {
         yield put(
-          catFavouriteSuccess({
+          catVisitedSuccess({
             catId: catId,
             favouriteId: id,
             activeFavourite: true,
@@ -70,7 +70,7 @@ export function* catFavouriteAdd(action) {
           })
         );
       } else {
-        yield put(catFavouriteFailure(new Error("error").message));
+        yield put(catVisitedFailure(new Error("error").message));
         yield put(
           showNotification({
             type: "warning",
@@ -81,7 +81,7 @@ export function* catFavouriteAdd(action) {
     }
   } catch (error) {
     console.log(error);
-    yield put(catFavouriteFailure(error));
+    yield put(catVisitedFailure(error));
     yield put(
       showNotification({
         type: "error",
@@ -91,13 +91,13 @@ export function* catFavouriteAdd(action) {
   }
 }
 //======================================================= ТЕСТИРОВАНИЕ
-export function* catFavouriteSaga() {
-  yield takeEvery(SET_CAT_FAVOURITE, catFavouriteAdd);
+export function* catsVisitedSaga() {
+  yield takeEvery(SET_CAT_VISITED, catVisitedAdd);
 }
 //====================================================================
 
 //======================================================= ТЕСТИРОВАНИЕ
-export function* catFavouriteDelete(action) {
+export function* catVisitedDelete(action) {
   // console.log("catFavouriteSaga : catFavouriteDelete", action.payload);
 
   try {
@@ -144,7 +144,7 @@ export function* catFavouriteDelete(action) {
 
       if (error) throw new Error().message;
 
-      yield put(deleteCatFavouriteSuccess({ data: catFavouriteFilter }));
+      yield put(deleteCatVisitedSuccess({ data: catFavouriteFilter }));
       yield put(
         showNotification({
           type: "success",
@@ -189,7 +189,7 @@ export function* catFavouriteDelete(action) {
         }
       });
 
-      yield put(deleteCatFavouriteSuccess({ data: catFavouriteFilter }));
+      yield put(deleteCatVisitedSuccess({ data: catFavouriteFilter }));
       yield put(
         showNotification({
           type: "success",
@@ -199,7 +199,7 @@ export function* catFavouriteDelete(action) {
     }
   } catch (error) {
     console.log(error);
-    yield put(deleteCatFavouriteFailure(error.message));
+    yield put(deleteCatVisitedFailure(error.message));
     yield put(
       showNotification({
         type: "error",
@@ -209,7 +209,7 @@ export function* catFavouriteDelete(action) {
   }
 }
 //======================================================= ТЕСТИРОВАНИЕ
-export function* deleteCatFavouriteSaga() {
-  yield takeEvery(DELETE_CAT_FAVOURITE, catFavouriteDelete);
+export function* deleteCatsVisitedSaga() {
+  yield takeEvery(DELETE_CAT_VISITED, catVisitedDelete);
 }
 //====================================================================
