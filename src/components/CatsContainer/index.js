@@ -19,11 +19,14 @@ const filtered = ({ cats, catsVisited }) => {
 let CatsContainer = ({ cats, isLoading, error, getCats, catsVisited }) => {
   const firstLoadedCutsNumber = 3;
 
+  const [showButton, setShowButton] = useState(false);
+
   useEffect(() => {
     // Первая загрузка и далее уже дозагрузка по кнопке
     if (cats.length === 0) {
       getCats(firstLoadedCutsNumber); // 15
     }
+    setShowButton(true);
   }, []);
 
   useEffect(() => {
@@ -60,7 +63,7 @@ let CatsContainer = ({ cats, isLoading, error, getCats, catsVisited }) => {
 
       {!error && filteredСats.length > 0 && <Cats cats={filteredСats} />}
 
-      {!error && !isLoading && (
+      {!error && showButton && cats.length > 0 && (
         <Button
           disabled={isLoading}
           className="mt-12 mb-8 mx-auto bg-blue rounded-md px-4 py-2 text-white whitespace-nowrap tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"

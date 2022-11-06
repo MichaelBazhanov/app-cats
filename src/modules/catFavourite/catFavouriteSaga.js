@@ -11,11 +11,7 @@ import {
   deleteCatFavouriteSuccess,
   deleteCatFavouriteFailure,
 } from "./actions";
-import {
-  updateCatFavourite,
-  updateCatFavouriteSuccess,
-  updateCatFavouriteFailure,
-} from "../catsFavourites";
+import { updateCatFavourite } from "../catsFavourites";
 import { showNotification } from "../tooltips"; // success or warning or error
 
 const getFavouriteId = (state) => state.catFavouriteReducer.catFavourite;
@@ -37,10 +33,16 @@ export function* catFavouriteAdd(action) {
 
       // ID постоянно меняется после удаления
       // Обновляем ID обьекта в главном редьюсере catsFavouritesReducer -> catsFavourites
-      yield put(updateCatFavouriteSuccess({favouriteId: newFavouriteId, image_id: image_id}))
+      yield put(
+        updateCatFavourite({ favouriteId: newFavouriteId, image_id: image_id })
+      );
 
       yield put(
-        catFavouriteSuccess({ catId: image_id, favouriteId: newFavouriteId, activeFavourite: true })
+        catFavouriteSuccess({
+          catId: image_id,
+          favouriteId: newFavouriteId,
+          activeFavourite: true,
+        })
       );
       yield put(
         showNotification({
@@ -54,7 +56,13 @@ export function* catFavouriteAdd(action) {
       } = yield call(serverSendCatFavourite, catId);
 
       if (id) {
-        yield put(catFavouriteSuccess({ catId: catId, favouriteId: id, activeFavourite: true })); // id image for id favourite
+        yield put(
+          catFavouriteSuccess({
+            catId: catId,
+            favouriteId: id,
+            activeFavourite: true,
+          })
+        ); // id image for id favourite
         yield put(
           showNotification({
             type: "success",
@@ -104,16 +112,29 @@ export function* catFavouriteDelete(action) {
         (element) => element.catId === image_id
       );
 
-      if (catFavourite.length > 0) { // Если я свой id нашел в массиве
+      if (catFavourite.length > 0) {
+        // Если я свой id нашел в массиве
         catFavouriteFilter = catFavouriteReducer.map((e) => {
-          if(e.catId === (catId || image_id)) {
-            return {catId: e.catId, favouriteId: favouriteId, activeFavourite: false}
+          if (e.catId === (catId || image_id)) {
+            return {
+              catId: e.catId,
+              favouriteId: favouriteId,
+              activeFavourite: false,
+            };
           } else {
-            return {catId: e.catId, favouriteId: e.favouriteId, activeFavourite: e.activeFavourite}
+            return {
+              catId: e.catId,
+              favouriteId: e.favouriteId,
+              activeFavourite: e.activeFavourite,
+            };
           }
-        })
-      } else { // Если я свой id НЕ нашел в массиве
-        catFavouriteFilter = [...catFavouriteReducer, { catId: image_id, favouriteId, activeFavourite: false }];
+        });
+      } else {
+        // Если я свой id НЕ нашел в массиве
+        catFavouriteFilter = [
+          ...catFavouriteReducer,
+          { catId: image_id, favouriteId, activeFavourite: false },
+        ];
       }
 
       let { success, error } = yield call(
@@ -123,22 +144,25 @@ export function* catFavouriteDelete(action) {
 
       if (error) throw new Error().message;
 
-      yield put(deleteCatFavouriteSuccess({data: catFavouriteFilter}));
+      yield put(deleteCatFavouriteSuccess({ data: catFavouriteFilter }));
       yield put(
         showNotification({
           type: "success",
           text: "Pet was removed from favourites.", // The pet has been added to favourites
         })
       );
-
     } else {
       const catFavouriteReducer = yield select(getFavouriteId);
 
-      const catFavourite= catFavouriteReducer.filter(
+      const catFavourite = catFavouriteReducer.filter(
         (element) => element.catId === catId
       );
 
-      const {catId: catId_, favouriteId: favouriteId_, activeFavourite: activeFavourite_} = catFavourite[0];
+      const {
+        catId: catId_,
+        favouriteId: favouriteId_,
+        activeFavourite: activeFavourite_,
+      } = catFavourite[0];
 
       if (favouriteId_.length === 0) throw new Error();
 
@@ -149,15 +173,23 @@ export function* catFavouriteDelete(action) {
 
       if (error) throw new Error();
 
-      const catFavouriteFilter = catFavouriteReducer.map((e)=>{
-        if(e.catId === catId) {
-          return {catId: e.catId, favouriteId: e.favouriteId, activeFavourite: false}
+      const catFavouriteFilter = catFavouriteReducer.map((e) => {
+        if (e.catId === catId) {
+          return {
+            catId: e.catId,
+            favouriteId: e.favouriteId,
+            activeFavourite: false,
+          };
         } else {
-          return {catId: e.catId, favouriteId: e.favouriteId, activeFavourite: e.activeFavourite}
+          return {
+            catId: e.catId,
+            favouriteId: e.favouriteId,
+            activeFavourite: e.activeFavourite,
+          };
         }
-      })
+      });
 
-      yield put(deleteCatFavouriteSuccess({data: catFavouriteFilter}));
+      yield put(deleteCatFavouriteSuccess({ data: catFavouriteFilter }));
       yield put(
         showNotification({
           type: "success",
