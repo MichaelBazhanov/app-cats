@@ -10,7 +10,7 @@ import {
 } from "./actions";
 import { updateCatFavourite } from "../catsFavourites";
 import { showNotification } from "../tooltips"; // success or warning or error
-import filtredToArray from '../../utils/helpers/filtredToArray'
+import filtredToArray from "../../utils/helpers/filtredToArray";
 
 const getFavouriteId = (state) => state.catsVisitedReducer.catFavourite;
 
@@ -111,6 +111,14 @@ export function* catVisitedDelete(action) {
       );
 
       if (catFavourite.length > 0) {
+        // ===========================================================
+        // catFavouriteFilter = filtredToArray({
+        //   array: catsVisitedReducer,
+        //   filterSign: [catId, image_id],
+        //   params: { favouriteId: favouriteId, activeFavourite: false },
+        // }); // Для теста хелпера
+        // ===========================================================
+
         // Если я свой id нашел в массиве
         catFavouriteFilter = catsVisitedReducer.map((e) => {
           if (e.catId === (catId || image_id)) {
@@ -170,6 +178,14 @@ export function* catVisitedDelete(action) {
       );
 
       if (error) throw new Error();
+
+      // ===========================================================
+      // const catFavouriteFilter = filtredToArray({
+      //   array: catsVisitedReducer,
+      //   filterSign: [catId],
+      //   params: { favouriteId: favouriteId, activeFavourite: false },
+      // }); // Для теста хелпера
+      // ===========================================================
 
       const catFavouriteFilter = catsVisitedReducer.map((e) => {
         if (e.catId === catId) {
