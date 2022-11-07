@@ -1,8 +1,5 @@
-import Heart from "../Heart";
-import {
-  setCatVisited,
-  deleteCatVisited,
-} from "../../modules/catsVisited";
+import Heart from "../components/Heart";
+import { setCatVisited, deleteCatVisited } from "../../../modules/catsVisited";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useHover } from "../../utils/hooks/hover";
-import HeartFill from "./HeartFill";
-import HeartStroke from "./HeartStroke";
+import { useHover } from "../../../../utils/hooks/hover";
+import HeartFill from "../../../../components/HeartFill";
+import HeartStroke from "../../../../components/HeartStroke";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 

@@ -1,5 +1,9 @@
+// Рабочий
 const api_key =
   "live_NULR4xgEwG1yoyOfQIGORjJhDhgZIWlpY48OFEpecOWv5VNX0lifb9cjVg1BKCvI";
+// На тест
+// const api_key =
+//   "live_TdnYJTTXkvQtXTGVTHLiTZidseVYOahjZxjaSbYmj6YoQbFiSYOPEJvqBGZmbbKM";
 const user_id = "MichaelB33";
 
 // Получаем котиков

@@ -1,5 +1,6 @@
-import Cat from "../Cat";
+import Cat from "../../../../components/Cat";
 import PropTypes from "prop-types";
+import HeartContainer from "../../../heart/HeartContainer";
 
 const Cats = ({ cats }) => {
   return (
@@ -16,14 +17,15 @@ const Cats = ({ cats }) => {
             },
             idx
           ) => (
-            <Cat
-              key={`${idx}${id}`}
-              id={id}
-              url={url}
-              activeHeart={activeHeart}
-              favourite={favourite}
-              image_id={image_id}
-            />
+            <Cat key={`${idx}${id}`} id={id} url={url}>
+              <HeartContainer
+                id={id}
+                className="text-orange absolute z-[2] bottom-3 right-3 cursor-pointer hidden group-hover:block"
+                activeHeart={activeHeart}
+                favourite={favourite}
+                image_id={image_id}
+              />
+            </Cat>
           )
         )}
     </div>

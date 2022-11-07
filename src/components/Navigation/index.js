@@ -1,6 +1,6 @@
 import CustomLink from "../CustomLink";
 
-const Header = () => {
+const Navigation = () => {
   return (
     <header className="bg-blue shadow-nav fixed w-full z-50 left-1/2 -translate-x-1/2">
       <nav className="max-w-screen-me mx-auto px-6 flex">
@@ -11,4 +11,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navigation;

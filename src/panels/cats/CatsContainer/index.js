@@ -1,13 +1,13 @@
-import Cats from "../Cats";
-import Button from "../Button";
-import Loading from "../Loading";
-import Error from "../Error";
-import CatsNo from "../CatsNo";
+import Cats from "../components/Cats";
+import Button from "../../../components/Button";
+import Loading from "../../../components/Loading";
+import Error from "../../../components/Error";
+import CatsNo from "../../../components/CatsNo";
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import { getCats } from "../../modules/cats";
+import { getCats } from "../../../modules/cats";
 
 const filtered = ({ cats, catsVisited }) => {
   return cats.filter((e) => {
@@ -39,9 +39,7 @@ let CatsContainer = ({ cats, isLoading, error, getCats, catsVisited }) => {
 
   return (
     <>
-      {error && (
-        <Error>Sorry. Kitty's crying. There's been some kind of mistake.</Error>
-      )}
+      {error && <Error />}
 
       {!error && isLoading && <Loading color="text-blue" size="h-10 w-10" />}
 
