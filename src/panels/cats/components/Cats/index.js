@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import HeartContainer from "../../../heart/HeartContainer";
 
 const Cats = ({ cats }) => {
-  console.log('Cats : ', cats);
   return (
     <div className="flex justify-center md:justify-start flex-wrap gap-12">
       {cats &&

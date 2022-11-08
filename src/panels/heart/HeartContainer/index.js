@@ -13,7 +13,8 @@ let HeartContainer = ({
   isFavourite,
   favoured,
   className,
-  isLoading,
+  isLoadingCats,
+  isLoadingCatsFavourite,
   addCatFavourites,
   removeCatFavourites,
   addCatsFavourites,
@@ -26,7 +27,8 @@ let HeartContainer = ({
       className={className}
       isFavourite={isFavourite}
       favoured={favoured}
-      isLoading={isLoading}
+      isLoadingCats={isLoadingCats}
+      isLoadingCatsFavourite={isLoadingCatsFavourite}
       addCatFavourites={addCatFavourites}
       removeCatFavourites={removeCatFavourites}
       addCatsFavourites={addCatsFavourites}
@@ -41,7 +43,8 @@ HeartContainer.propTypes = {
   isFavourite: PropTypes.bool,
   favoured: PropTypes.bool,
   className: PropTypes.string,
-  isLoading: PropTypes.bool,
+  isLoadingCats: PropTypes.bool,
+  isLoadingCatsFavourite: PropTypes.bool,
   addCatFavourites: PropTypes.func,
   removeCatFavourites: PropTypes.func,
   addCatsFavourites: PropTypes.func,
@@ -50,7 +53,8 @@ HeartContainer.propTypes = {
 
 HeartContainer = connect(
   (state) => ({
-    isLoading: state.catsReducer.isLoading,
+    isLoadingCats: state.catsReducer.isLoading,
+    isLoadingCatsFavourite: state.catsFavouritesReducer.isLoading,
   }),
   {
     addCatFavourites,

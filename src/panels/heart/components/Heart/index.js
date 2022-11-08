@@ -11,7 +11,8 @@ const Heart = ({
   image_id,
   isFavourite,
   favoured,
-  isLoading,
+  isLoadingCats,
+  isLoadingCatsFavourite,
   addCatFavourites,
   removeCatFavourites,
   addCatsFavourites,
@@ -27,7 +28,7 @@ const Heart = ({
   const handler = () => {
     setActive(!active);
 
-    if (!isLoading) {
+    if (!isLoadingCats && !isLoadingCatsFavourite) {
       if (favoured) {
         if (active) {
           removeCatsFavourites({ id });
@@ -49,19 +50,19 @@ const Heart = ({
       {active ? (
         <HeartFill
           className={classNames("h-9.5", {
-            "opacity-50 pointer-events-none": isLoading,
+            "opacity-50 pointer-events-none": (isLoadingCats || isLoadingCatsFavourite),
           })}
         />
       ) : hookValue ? (
         <HeartFill
           className={classNames("h-9.5", {
-            "opacity-50 pointer-events-none": isLoading,
+            "opacity-50 pointer-events-none": (isLoadingCats || isLoadingCatsFavourite),
           })}
         />
       ) : (
         <HeartStroke
           className={classNames("h-9.5", {
-            "opacity-50 pointer-events-none": isLoading,
+            "opacity-50 pointer-events-none": (isLoadingCats || isLoadingCatsFavourite),
           })}
         />
       )}
