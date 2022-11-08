@@ -6,19 +6,9 @@ import CatsNo from "../../../components/CatsNo";
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-
 import { getCats } from "../../../modules/cats";
 
-const filtered = ({ cats, catsVisited }) => {
-  return cats.filter((e) => {
-    const cat = catsVisited.filter((v) => {
-      return e.id === v.catId && v.activeFavourite;
-    });
-    return !cat.length;
-  });
-};
-
-let CatsContainer = ({ cats, isLoading, error, getCats, catsVisited }) => {
+let CatsContainer = ({ cats, isLoading, error, getCats }) => {
   const firstLoadedCutsNumber = 6;
 
   const [showButton, setShowButton] = useState(false);
@@ -31,24 +21,19 @@ let CatsContainer = ({ cats, isLoading, error, getCats, catsVisited }) => {
     setShowButton(true);
   }, []);
 
-  const [filteredСats, setFilteredСats] = useState([]);
-  useEffect(() => {
-    setFilteredСats(filtered({ cats, catsVisited }));
-  }, [cats]);
-
   return (
     <>
       {error && <Error />}
 
       {!error && isLoading && <Loading color="text-blue" size="h-10 w-10" />}
 
-      {!error && !isLoading && filteredСats.length === 0 && (
+      {!error && !isLoading && cats.length === 0 && (
         <CatsNo>
           Sorry you ran out of kitties. Try downloading some more.
         </CatsNo>
       )}
 
-      {!error && filteredСats.length > 0 && <Cats cats={filteredСats} />}
+      {!error && cats.length > 0 && <Cats cats={cats} />}
 
       {!error && showButton && cats.length > 0 && (
         <Button
@@ -63,7 +48,7 @@ let CatsContainer = ({ cats, isLoading, error, getCats, catsVisited }) => {
 
 CatsContainer.propTypes = {
   cats: PropTypes.array,
-  catsVisited: PropTypes.array,
+  // catsVisited: PropTypes.array,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
   getCats: PropTypes.func,
@@ -74,7 +59,6 @@ CatsContainer = connect(
     cats: state.catsReducer.cats,
     isLoading: state.catsReducer.isLoading,
     error: state.catsReducer.error,
-    catsVisited: state.catsVisitedReducer.catFavourite,
   }),
   {
     getCats,

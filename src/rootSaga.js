@@ -1,19 +1,21 @@
 import { all, fork } from "redux-saga/effects";
 
-import { catsSaga } from "./modules/cats";
-import { catsFavouritesSaga } from "./modules/catsFavourites";
-import { tooltipsSaga } from "./modules/tooltips";
+import { catsSaga, addCatsSaga, removeCatsSaga } from "./modules/cats";
 import {
-  catsVisitedSaga,
-  deleteCatsVisitedSaga,
-} from "./modules/catsVisited";
+  catsFavouritesSaga,
+  addCatsFavouritesSaga,
+  removeCatsFavouritesSaga,
+} from "./modules/catsFavourites";
+import { tooltipsSaga } from "./modules/tooltips";
 
 export function* rootSaga() {
   yield all([
     fork(catsSaga),
+    fork(addCatsSaga),
+    fork(removeCatsSaga),
     fork(catsFavouritesSaga),
+    fork(addCatsFavouritesSaga),
+    fork(removeCatsFavouritesSaga),
     fork(tooltipsSaga),
-    fork(catsVisitedSaga),
-    fork(deleteCatsVisitedSaga),
   ]);
 }

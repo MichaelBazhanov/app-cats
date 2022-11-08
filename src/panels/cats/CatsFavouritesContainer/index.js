@@ -6,7 +6,6 @@ import CatsNo from "../../../components/CatsNo";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-
 import { getCatsFavourites } from "../../../modules/catsFavourites";
 
 let CatsFavouritesContainer = ({
