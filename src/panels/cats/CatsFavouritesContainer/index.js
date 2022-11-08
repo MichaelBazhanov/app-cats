@@ -48,7 +48,6 @@ let CatsFavouritesContainer = ({
           onClick={() => setCount(count + 6)}
         />
       )}
-      {<div>{count}</div>}
     </>
   );
 };

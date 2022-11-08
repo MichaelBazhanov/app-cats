@@ -57,7 +57,6 @@ let CatsContainer = ({ cats, isLoading, error, getCats, catsVisited }) => {
           onClick={() => getCats(firstLoadedCutsNumber)}
         />
       )}
-      {<div>{firstLoadedCutsNumber}</div>}
     </>
   );
 };
