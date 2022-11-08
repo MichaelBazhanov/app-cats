@@ -24,3 +24,12 @@ export default function filtredToArray({
 
   return filtredArray;
 }
+
+// catsVisitedSaga 114 и 182 строки
+// ===========================================================
+// const catFavouriteFilter = filtredToArray({
+//   array: catsVisitedReducer,
+//   filterSign: [catId],
+//   params: { favouriteId: favouriteId, activeFavourite: false },
+// }); // Для теста хелпера
+// ===========================================================

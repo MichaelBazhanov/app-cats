@@ -10,9 +10,9 @@ import {
 } from "./actions";
 import { updateCatFavourite } from "../catsFavourites";
 import { showNotification } from "../tooltips"; // success or warning or error
-import filtredToArray from "../../utils/helpers/filtredToArray";
+// import filtredToArray from "../../utils/helpers/filtredToArray";
 
-const getFavouriteId = (state) => state.catsVisitedReducer.catFavourite;
+const getVisitedCat = (state) => state.catsVisitedReducer.catFavourite;
 
 //======================================================= ТЕСТИРОВАНИЕ
 export function* catVisitedAdd(action) {
@@ -42,6 +42,7 @@ export function* catVisitedAdd(action) {
           activeFavourite: true,
         })
       );
+
       yield put(
         showNotification({
           type: "success",
@@ -49,9 +50,12 @@ export function* catVisitedAdd(action) {
         })
       );
     } else {
-      let {
+      const {
         success: { id },
+        error,
       } = yield call(serverSendCatFavourite, catId);
+
+      if (error) throw new Error(error);
 
       if (id) {
         yield put(
@@ -60,7 +64,8 @@ export function* catVisitedAdd(action) {
             favouriteId: id,
             activeFavourite: true,
           })
-        ); // id image for id favourite
+        );
+
         yield put(
           showNotification({
             type: "success",
@@ -69,6 +74,7 @@ export function* catVisitedAdd(action) {
         );
       } else {
         yield put(catVisitedFailure(new Error("error").message));
+
         yield put(
           showNotification({
             type: "warning",
@@ -79,7 +85,9 @@ export function* catVisitedAdd(action) {
     }
   } catch (error) {
     console.log(error);
-    yield put(catVisitedFailure(error));
+
+    yield put(catVisitedFailure(error.message));
+
     yield put(
       showNotification({
         type: "error",
@@ -104,21 +112,13 @@ export function* catVisitedDelete(action) {
     if (favouriteId) {
       let catFavouriteFilter = [];
 
-      const catsVisitedReducer = yield select(getFavouriteId);
+      const catsVisitedReducer = yield select(getVisitedCat);
 
       const catFavourite = catsVisitedReducer.filter(
         (element) => element.catId === image_id
       );
 
       if (catFavourite.length > 0) {
-        // ===========================================================
-        // catFavouriteFilter = filtredToArray({
-        //   array: catsVisitedReducer,
-        //   filterSign: [catId, image_id],
-        //   params: { favouriteId: favouriteId, activeFavourite: false },
-        // }); // Для теста хелпера
-        // ===========================================================
-
         // Если я свой id нашел в массиве
         catFavouriteFilter = catsVisitedReducer.map((e) => {
           if (e.catId === (catId || image_id)) {
@@ -151,6 +151,7 @@ export function* catVisitedDelete(action) {
       if (error) throw new Error().message;
 
       yield put(deleteCatVisitedSuccess({ data: catFavouriteFilter }));
+
       yield put(
         showNotification({
           type: "success",
@@ -158,7 +159,7 @@ export function* catVisitedDelete(action) {
         })
       );
     } else {
-      const catsVisitedReducer = yield select(getFavouriteId);
+      const catsVisitedReducer = yield select(getVisitedCat);
 
       const catFavourite = catsVisitedReducer.filter(
         (element) => element.catId === catId
@@ -179,14 +180,6 @@ export function* catVisitedDelete(action) {
 
       if (error) throw new Error();
 
-      // ===========================================================
-      // const catFavouriteFilter = filtredToArray({
-      //   array: catsVisitedReducer,
-      //   filterSign: [catId],
-      //   params: { favouriteId: favouriteId, activeFavourite: false },
-      // }); // Для теста хелпера
-      // ===========================================================
-
       const catFavouriteFilter = catsVisitedReducer.map((e) => {
         if (e.catId === catId) {
           return {
@@ -204,6 +197,7 @@ export function* catVisitedDelete(action) {
       });
 
       yield put(deleteCatVisitedSuccess({ data: catFavouriteFilter }));
+
       yield put(
         showNotification({
           type: "success",
@@ -213,7 +207,9 @@ export function* catVisitedDelete(action) {
     }
   } catch (error) {
     console.log(error);
+
     yield put(deleteCatVisitedFailure(error.message));
+
     yield put(
       showNotification({
         type: "error",

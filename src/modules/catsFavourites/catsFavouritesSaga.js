@@ -5,28 +5,33 @@ import {
   catsFavouritesSuccess,
   catsFavouritesFailure,
 } from "./actions";
+import { showNotification } from "../tooltips"; // success or warning or error
 
 //======================================================= ТЕСТИРОВАНИЕ
 export function* catsFavourites(action) {
   try {
     const { quantity } = action.payload;
 
-    let { success } = yield call(serverGetCatsFavourites, quantity);
+    let { success, error } = yield call(serverGetCatsFavourites, quantity);
 
-    const successForFavourites = success.map(
-      ({ id, image: { url }, image: { id: image_id } }) => {
-        return { id, url, activeHeart: true, favourite: true, image_id };
-      }
-    );
+    if (error) throw new Error(error);
 
-    if (success) {
-      yield put(catsFavouritesSuccess(successForFavourites));
-    } else {
-      yield put(catsFavouritesFailure(new Error("error").message));
-    }
+    success = success.map(({ id, image: { url }, image: { id: image_id } }) => {
+      return { id, url, activeHeart: true, favourite: true, image_id };
+    });
+
+    yield put(catsFavouritesSuccess(success));
   } catch (error) {
-    console.log(error)
-    yield put(catsFavouritesFailure(error.response));
+    console.log(error);
+
+    yield put(catsFavouritesFailure(error.message));
+
+    yield put(
+      showNotification({
+        type: "error",
+        text: "I'm sorry, but there's been some kind of mistake.",
+      })
+    );
   }
 }
 //======================================================= ТЕСТИРОВАНИЕ
