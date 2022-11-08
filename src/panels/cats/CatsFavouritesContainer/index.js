@@ -21,7 +21,6 @@ let CatsFavouritesContainer = ({
   const [count, setCount] = useState(firstLoadedCutsFavouritesNumber); // loaded cats number //15
 
   useEffect(() => {
-    getCatsFavourites(count);
     setShowButton(true);
   }, []);
 
