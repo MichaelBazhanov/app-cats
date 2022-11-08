@@ -15,15 +15,19 @@ let CatsFavouritesContainer = ({
   error,
   getCatsFavourites,
 }) => {
-  let firstLoadedCutsFavouritesNumber = 6;
+  const firstLoadedCutsFavouritesNumber = 6;
 
   const [showButton, setShowButton] = useState(false);
-  const [count, setCount] = useState(6); // loaded cats number //15
+  const [count, setCount] = useState(firstLoadedCutsFavouritesNumber); // loaded cats number //15
 
   useEffect(() => {
-    getCatsFavourites(firstLoadedCutsFavouritesNumber);
+    getCatsFavourites(count);
     setShowButton(true);
   }, []);
+
+  useEffect(() => {
+    getCatsFavourites(count);
+  }, [count]);
 
   return (
     <>
@@ -41,10 +45,10 @@ let CatsFavouritesContainer = ({
         <Button
           disabled={isLoading}
           className="mt-12 mb-8 mx-auto bg-blue rounded-md px-4 py-2 text-white whitespace-nowrap tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
-          getCatsFavourites={() => getCatsFavourites(count)}
-          numberFavouriteCats={() => setCount(count + 3)} // iterable
+          onClick={() => setCount(count + 6)}
         />
       )}
+      {<div>{count}</div>}
     </>
   );
 };
