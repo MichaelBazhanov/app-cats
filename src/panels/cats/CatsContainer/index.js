@@ -8,6 +8,10 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { getCats } from "../../../modules/cats";
 
+const filtred = (cats) => {
+  return cats.filter((e) => e.isFavourite === false);
+};
+
 let CatsContainer = ({ cats, isLoading, error, getCats }) => {
   const firstLoadedCutsNumber = 6;
 
@@ -28,7 +32,7 @@ let CatsContainer = ({ cats, isLoading, error, getCats }) => {
       {!error && isLoading && <Loading color="text-blue" size="h-10 w-10" />}
 
       {!error && !isLoading && cats.length === 0 && (
-        <CatsNo>
+        <CatsNo getCats={() => getCats(firstLoadedCutsNumber)}>
           Sorry you ran out of kitties. Try downloading some more.
         </CatsNo>
       )}
@@ -48,7 +52,6 @@ let CatsContainer = ({ cats, isLoading, error, getCats }) => {
 
 CatsContainer.propTypes = {
   cats: PropTypes.array,
-  // catsVisited: PropTypes.array,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
   getCats: PropTypes.func,

@@ -34,7 +34,9 @@ let CatsFavouritesContainer = ({
       {!error && isLoading && <Loading color="text-blue" size="h-10 w-10" />}
 
       {!error && !isLoading && catsFavourites.length === 0 && (
-        <CatsNo>Sorry, but the cats didn't come this time</CatsNo>
+        <CatsNo getCats={() => getCatsFavourites(count)}>
+          Sorry, but the cats didn't come this time
+        </CatsNo>
       )}
 
       {!error && catsFavourites.length > 0 && <Cats cats={catsFavourites} />}

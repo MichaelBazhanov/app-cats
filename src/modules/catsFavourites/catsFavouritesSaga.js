@@ -15,6 +15,7 @@ import {
   removeCatsFavouritesSuccess,
   removeCatsFavouritesFailure,
 } from "./actions";
+import { removeCatFavouritesSuccess } from "../cats";
 import { showNotification } from "../tooltips"; // success or warning or error
 
 //======================================================= ТЕСТИРОВАНИЕ
@@ -109,6 +110,7 @@ export function* removeCats(action) {
     if (error) throw new Error(error);
 
     yield put(removeCatsFavouritesSuccess({ id, isFavourite: false }));
+    yield put(removeCatFavouritesSuccess({ id, isFavourite: false }));
 
     yield put(
       showNotification({

@@ -65,7 +65,6 @@ export default function (state = initialState, action) {
         error: action.payload.error,
       };
     }
-
     case REMOVE_CAT_FAVOURITES: {
       return {
         ...state,
@@ -93,7 +92,6 @@ export default function (state = initialState, action) {
         error: action.payload.error,
       };
     }
-
     default:
       return state;
   }
