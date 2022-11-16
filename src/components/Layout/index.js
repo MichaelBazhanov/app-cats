@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Navigation from "../Navigation";
-import NotificationContainer from "../../panels/notification/NotificationContainer";
+import NotificationContainer from "../../containers/notification/NotificationContainer";
 
 const Layout = () => {
   return (

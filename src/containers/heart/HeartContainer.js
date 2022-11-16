@@ -1,9 +1,9 @@
-import Heart from "../components/Heart";
-import { addCatFavourites, removeCatFavourites } from "../../../modules/cats";
+import Heart from "./components/Heart";
+import { addCatFavourites, removeCatFavourites } from "../../modules/cats";
 import {
   addCatsFavourites,
   removeCatsFavourites,
-} from "../../../modules/catsFavourites";
+} from "../../modules/catsFavourites";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 

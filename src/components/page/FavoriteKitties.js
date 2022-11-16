@@ -1,4 +1,4 @@
-import CatsFavouritesContainer from "../../panels/cats/CatsFavouritesContainer";
+import CatsFavouritesContainer from "../../containers/cats/CatsFavouritesContainer";
 
 const FavouriteKitties = () => {
   return (

@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Notification from "../components/Notification";
+import Notification from "./components/Notification";
 import classNames from "classnames";
-import { hideNotification } from "../../../modules/tooltips";
+import { hideNotification } from "../../modules/tooltips";
 
 
 const NotificationContainer = ({
