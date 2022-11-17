@@ -13,6 +13,7 @@ let HeartContainer = ({
   isFavourite,
   favoured,
   className,
+
   isLoadingCats,
   isLoadingCatsFavourite,
   addCatFavourites,

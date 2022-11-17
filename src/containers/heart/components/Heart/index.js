@@ -4,13 +4,15 @@ import HeartFill from "../../../../components/HeartFill";
 import HeartStroke from "../../../../components/HeartStroke";
 import classNames from "classnames";
 import PropTypes from "prop-types";
+import { useHeart } from "../../../../utils/hooks/heart";
 
 const Heart = ({
-  className,
   id,
   image_id,
   isFavourite,
   favoured,
+  className,
+
   isLoadingCats,
   isLoadingCatsFavourite,
   addCatFavourites,
@@ -19,11 +21,7 @@ const Heart = ({
   removeCatsFavourites,
 }) => {
   const [hookRef, hookValue] = useHover();
-  const [active, setActive] = useState(false);
-
-  useEffect(() => {
-    if (isFavourite) setActive(true);
-  }, [isFavourite]);
+  const [active, setActive] = useHeart(false, isFavourite);
 
   const handler = () => {
     setActive(!active);
@@ -50,19 +48,22 @@ const Heart = ({
       {active ? (
         <HeartFill
           className={classNames("h-9.5", {
-            "opacity-50 pointer-events-none": (isLoadingCats || isLoadingCatsFavourite),
+            "opacity-50 pointer-events-none":
+              isLoadingCats || isLoadingCatsFavourite,
           })}
         />
       ) : hookValue ? (
         <HeartFill
           className={classNames("h-9.5", {
-            "opacity-50 pointer-events-none": (isLoadingCats || isLoadingCatsFavourite),
+            "opacity-50 pointer-events-none":
+              isLoadingCats || isLoadingCatsFavourite,
           })}
         />
       ) : (
         <HeartStroke
           className={classNames("h-9.5", {
-            "opacity-50 pointer-events-none": (isLoadingCats || isLoadingCatsFavourite),
+            "opacity-50 pointer-events-none":
+              isLoadingCats || isLoadingCatsFavourite,
           })}
         />
       )}
@@ -71,7 +72,7 @@ const Heart = ({
 };
 
 Heart.propTypes = {
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  id: PropTypes.number,
   image_id: PropTypes.string,
   isFavourite: PropTypes.bool,
   favoured: PropTypes.bool,
