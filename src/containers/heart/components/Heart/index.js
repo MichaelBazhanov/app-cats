@@ -5,6 +5,7 @@ import HeartStroke from "../../../../components/HeartStroke";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { useHeart } from "../../../../utils/hooks/heart";
+import { useHeartClick } from "../../../../utils/hooks/heartClick";
 
 const Heart = ({
   id,
@@ -23,25 +24,17 @@ const Heart = ({
   const [hookRef, hookValue] = useHover();
   const [active, setActive] = useHeart(false, isFavourite);
 
-  const handler = () => {
-    setActive(!active);
-
-    if (!isLoadingCats && !isLoadingCatsFavourite) {
-      if (favoured) {
-        if (active) {
-          removeCatsFavourites({ id });
-        } else {
-          addCatsFavourites({ image_id });
-        }
-      } else {
-        if (active) {
-          removeCatFavourites({ id });
-        } else {
-          addCatFavourites({ image_id });
-        }
-      }
-    }
-  };
+  const [handler] = useHeartClick({
+    active: { active, setActive },
+    loading: { isLoadingCats, isLoadingCatsFavourite },
+    favoured: favoured,
+    methods: {
+      addCatFavourites: () => addCatFavourites({ image_id }),
+      removeCatFavourites: () => removeCatFavourites({ id }),
+      addCatsFavourites: () => addCatsFavourites({ image_id }),
+      removeCatsFavourites: () => removeCatsFavourites({ id }),
+    },
+  });
 
   return (
     <div className={className} ref={hookRef} onClick={handler}>

@@ -5,18 +5,18 @@ const Error = () => {
   const [count, setCount] = useState(5);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setCount(count - 1);
-    }, 1000);
+    // const timer = setTimeout(() => {
+    //   setCount(count - 1);
+    // }, 1000);
 
-    if (count === 0) {
-      window.location.reload();
-      clearTimeout(timer);
-    }
+    // if (count === 0) {
+    //   window.location.reload();
+    //   clearTimeout(timer);
+    // }
 
-    return () => {
-      clearTimeout(timer);
-    };
+    // return () => {
+    //   clearTimeout(timer);
+    // };
   }, [count]);
 
   return (

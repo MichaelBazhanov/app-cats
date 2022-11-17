@@ -1,11 +1,12 @@
+import { connect } from "react-redux";
 import Heart from "./components/Heart";
 import { addCatFavourites, removeCatFavourites } from "../../modules/cats";
 import {
   addCatsFavourites,
   removeCatsFavourites,
 } from "../../modules/catsFavourites";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { withHeart } from "../../utils/hocs/withToggleHeart";
 
 let HeartContainer = ({
   id,
@@ -22,7 +23,7 @@ let HeartContainer = ({
   removeCatsFavourites,
 }) => {
   return (
-    <Heart
+    <withHeart
       id={id}
       image_id={image_id}
       className={className}
