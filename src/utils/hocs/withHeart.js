@@ -16,21 +16,17 @@ export function withHeart(Component) {
     } = props;
 
     const handler = () => {
-      setActive(!active);
-
-      if (!isLoadingCats && !isLoadingCatsFavourite) {
-        if (favoured) {
-          if (active) {
-            removeCatsFavourites();
-          } else {
-            addCatsFavourites();
-          }
+      if (favoured) {
+        if (isFavourite) {
+          removeCatsFavourites({ id });
         } else {
-          if (active) {
-            removeCatFavourites();
-          } else {
-            addCatFavourites();
-          }
+          addCatsFavourites({ image_id });
+        }
+      } else {
+        if (isFavourite) {
+          removeCatFavourites({ id });
+        } else {
+          addCatFavourites({ image_id });
         }
       }
     };
@@ -38,8 +34,9 @@ export function withHeart(Component) {
     return (
       <Component
         handler={handler}
-        // isLoading={!isLoadingCats && !isLoadingCatsFavourite}
-        isLoading={isLoadingCats && isLoadingCatsFavourite}
+        isFavourite={isFavourite}
+        className={className}
+        isLoading={isLoadingCats || isLoadingCatsFavourite}
         {...otherProps}
       />
     );

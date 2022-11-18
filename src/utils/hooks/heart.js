@@ -9,3 +9,4 @@ export function useHeart(firstState = false, firstActive = false) {
 
   return [active, setActive];
 }
+  // const [active, setActive] = useHeart(false, isFavourite);

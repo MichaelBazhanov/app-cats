@@ -6,7 +6,6 @@ import {
   removeCatsFavourites,
 } from "../../modules/catsFavourites";
 import PropTypes from "prop-types";
-import { withHeart } from "../../utils/hocs/withToggleHeart";
 
 let HeartContainer = ({
   id,
@@ -23,7 +22,7 @@ let HeartContainer = ({
   removeCatsFavourites,
 }) => {
   return (
-    <withHeart
+    <Heart
       id={id}
       image_id={image_id}
       className={className}

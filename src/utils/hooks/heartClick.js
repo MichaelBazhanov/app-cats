@@ -32,3 +32,14 @@ export function useHeartClick(props) {
   };
   return [handler];
 }
+  // const [handler] = useHeartClick({
+  //   active: { active, setActive },
+  //   loading: { isLoadingCats, isLoadingCatsFavourite },
+  //   favoured: favoured,
+  //   methods: {
+  //     addCatFavourites: () => addCatFavourites({ image_id }),
+  //     removeCatFavourites: () => removeCatFavourites({ id }),
+  //     addCatsFavourites: () => addCatsFavourites({ image_id }),
+  //     removeCatsFavourites: () => removeCatsFavourites({ id }),
+  //   },
+  // });
