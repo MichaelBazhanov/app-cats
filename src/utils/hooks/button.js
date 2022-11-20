@@ -17,3 +17,17 @@ export function useButton({ firstState, callback = () => {} }) {
     showButton,
   };
 }
+
+// export function useButton({ firstState, callback }) {
+//   const [showButton, setShowButton] = useState(firstState);
+
+//   // Первая загрузка и далее уже дозагрузка по кнопке
+//   useEffect(() => {
+//     setShowButton(true);
+//     callback?.();
+//   }, []);
+
+//   return {
+//     showButton,
+//   };
+// }
