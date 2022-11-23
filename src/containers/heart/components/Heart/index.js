@@ -1,4 +1,4 @@
-import { useHover } from "../../../../utils/hooks/hover";
+import { useHover } from "../../../../utils/hooks/useHover";
 import HeartFill from "../../../../components/HeartFill";
 import HeartStroke from "../../../../components/HeartStroke";
 import classNames from "classnames";

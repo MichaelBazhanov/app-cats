@@ -6,7 +6,6 @@ import Cats from "./components/Cats";
 import Button from "../../components/Button";
 import CatsNo from "../../components/CatsNo";
 import { getCatsFavourites } from "../../modules/catsFavourites";
-import { useButton } from "../../utils/hooks/button";
 import PropTypes from "prop-types";
 
 let CatsFavouritesContainer = ({
@@ -24,10 +23,6 @@ let CatsFavouritesContainer = ({
     getCatsFavourites(count);
   }, [count]);
 
-  const { showButton } = useButton({
-    firstState: false,
-  });
-
   return (
     <>
       {error && <Error />}
@@ -42,7 +37,7 @@ let CatsFavouritesContainer = ({
 
       {!error && catsFavourites.length > 0 && <Cats cats={catsFavourites} />}
 
-      {!error && showButton && catsFavourites.length > 0 && (
+      {!error && catsFavourites.length > 0 && (
         <Button
           disabled={isLoading}
           className="mt-12 mb-8 mx-auto bg-blue rounded-md px-4 py-2 text-white whitespace-nowrap tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"

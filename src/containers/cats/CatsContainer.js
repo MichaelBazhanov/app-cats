@@ -7,16 +7,14 @@ import Error from "../../components/Error";
 import CatsNo from "../../components/CatsNo";
 import PropTypes from "prop-types";
 import { getCats } from "../../modules/cats";
-import { useButton } from "../../utils/hooks/button";
 import FilterCats from "../../components/FilterCats";
 
 let CatsContainer = ({ cats, isLoading, error, getCats }) => {
-  const firstLoadedCutsNumber = 1; //15
+  const firstLoadedCutsNumber = 1; // 15 // Первая загрузка
 
-  const { showButton } = useButton({
-    firstState: false,
-    callback: () => getCats(firstLoadedCutsNumber),
-  });
+  useEffect(() => {
+    if (!filtredCats.length) getCats(firstLoadedCutsNumber);
+  }, []);
 
   const [filterValue, setFilterValue] = useState("Показать всех");
 
@@ -53,7 +51,7 @@ let CatsContainer = ({ cats, isLoading, error, getCats }) => {
         </>
       )}
 
-      {!error && showButton && filtredCats.length > 0 && (
+      {!error && filtredCats.length > 0 && (
         <Button
           disabled={isLoading}
           className="mt-12 mb-8 mx-auto bg-blue rounded-md px-4 py-2 text-white whitespace-nowrap tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
@@ -82,5 +80,4 @@ CatsContainer = connect(
   }
 )(CatsContainer);
 
-const Test = React.memo(CatsContainer);
-export default Test;
+export default CatsContainer;
