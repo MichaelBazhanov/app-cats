@@ -34,7 +34,7 @@ let CatsContainer = ({ cats, isLoading, error, getCats }) => {
 
   return (
     <>
-      {error && <Error />}
+      {true && <Error />}
 
       {!error && isLoading && <Loading color="text-blue" size="h-10 w-10" />}
 
