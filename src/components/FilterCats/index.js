@@ -1,32 +1,27 @@
-const data = [
-  { id: 0, name: "Показать всех" },
-  { id: 1, name: "Показать любимых" },
-  { id: 2, name: "Не показывать любимых" },
-];
+import Checkbox from "../Checkbox";
+import PropTypes from "prop-types";
 
-const FilterCats = ({ filterValueSelected }) => {
-  // const onFilterValueClick = (e) => {
-  //   filterValueSelected(e.target.innerHTML);
-  // };
-
+const FilterCats = ({ valueFiltered, toggleFilteredCats, changeTitle }) => {
   return (
-    <div>
-      <div className="mb-6 flex flex-wrap gap-4 justify-end bg-blue bg-opacity-10">
-        {data.map((e) => {
-          return (
-            <button
-              onClick={() => filterValueSelected(e.name)}
-              key={e.id}
-              data-name={e.name}
-              className="bg-blue px-4 py-2 cursor-pointer text-white whitespace-nowrap tracking-wide text-sm"
-            >
-              {e.name}
-            </button>
-          );
-        })}
-      </div>
+    <div
+      className="mb-6 p-1 flex items-center flex-wrap gap-4 justify-end bg-blue bg-opacity-10"
+      title={changeTitle()}
+    >
+      <h3 className="text-sm text-black whitespace-nowrap tracking-wide">
+        Показать всех
+      </h3>
+      <Checkbox
+        initialValue={valueFiltered}
+        settingValue={toggleFilteredCats}
+      />
     </div>
   );
+};
+
+FilterCats.propTypes = {
+  valueFiltered: PropTypes.bool,
+  settingValue: PropTypes.func,
+  changeTitle: PropTypes.func,
 };
 
 export default FilterCats;

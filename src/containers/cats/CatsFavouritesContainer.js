@@ -6,6 +6,8 @@ import Cats from "./components/Cats";
 import Button from "../../components/Button";
 import CatsNo from "../../components/CatsNo";
 import { getCatsFavourites } from "../../modules/catsFavourites";
+import FilterCats from "../../components/FilterCats";
+import { useLocalStorage } from "./../../utils/hooks/useLocalStorage";
 import PropTypes from "prop-types";
 
 let CatsFavouritesContainer = ({
@@ -14,8 +16,8 @@ let CatsFavouritesContainer = ({
   error,
   getCatsFavourites,
 }) => {
-  const firstLoadedCutsFavouritesNumber = 1; // 15 // Первая загрузка
-  const additionNumber = 1; // 6 // Число прибавления по кнопке
+  const firstLoadedCutsFavouritesNumber = 10; // 15 // Первая загрузка
+  const additionNumber = 5; // 6 // Число прибавления по кнопке
 
   const [count, setCount] = useState(firstLoadedCutsFavouritesNumber);
 
@@ -23,21 +25,51 @@ let CatsFavouritesContainer = ({
     getCatsFavourites(count);
   }, [count]);
 
+  const [valueFiltered, setValueFiltered] = useLocalStorage(
+    true,
+    "filtered-cats"
+  );
+  const toggleFilteredCats = () => {
+    setValueFiltered(!valueFiltered);
+  };
+  const changeTitle = () => {
+    return valueFiltered
+      ? "Показаны и простые и любимые кошки"
+      : "Показаны только любимые кошки";
+  };
+
+  const filteredCats = catsFavourites.filter((cat) => {
+    if (!valueFiltered) {
+      return cat.isFavourite === true;
+    }
+
+    return cat;
+  });
+
   return (
     <>
       {error && <Error />}
 
       {!error && isLoading && <Loading color="text-blue" size="h-10 w-10" />}
 
-      {!error && !isLoading && catsFavourites.length === 0 && (
+      {!error && !isLoading && filteredCats.length === 0 && (
         <CatsNo getCats={() => getCatsFavourites(count)}>
           Sorry, but the cats didn't come this time
         </CatsNo>
       )}
 
-      {!error && catsFavourites.length > 0 && <Cats cats={catsFavourites} />}
+      {!error && filteredCats.length > 0 && (
+        <>
+          <FilterCats
+            valueFiltered={valueFiltered}
+            toggleFilteredCats={toggleFilteredCats}
+            changeTitle={changeTitle}
+          />
+          <Cats cats={filteredCats} />
+        </>
+      )}
 
-      {!error && catsFavourites.length > 0 && (
+      {!error && filteredCats.length > 0 && (
         <Button
           disabled={isLoading}
           className="mt-12 mb-8 mx-auto bg-blue rounded-md px-4 py-2 text-white whitespace-nowrap tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"

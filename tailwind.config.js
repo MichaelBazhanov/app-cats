@@ -24,12 +24,13 @@ module.exports = {
           "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 58.85%);",
       },
       boxShadow: {
-        nav: "0px 4px 4px rgba(0, 0, 0, 0.24)",
+        small: "inset 0px 0px 5px rgba(0, 0, 0, 0.2)",
         cat: "0px 6px 5px rgba(0, 0, 0, 0.24), 0px 9px 18px rgba(0, 0, 0, 0.18)",
+        nav: "0px 4px 4px rgba(0, 0, 0, 0.24)",
       },
       minHeight: {
         'cat': '14rem',
-      }
+      },
     },
   },
   plugins: [],
