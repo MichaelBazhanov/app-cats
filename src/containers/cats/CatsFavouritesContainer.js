@@ -8,6 +8,8 @@ import CatsNo from "../../components/CatsNo";
 import { getCatsFavourites } from "../../modules/catsFavourites";
 import FilterCats from "../../components/FilterCats";
 import { useLocalStorage } from "./../../utils/hooks/useLocalStorage";
+import { getValue } from "../../utils/helpers/getValue";
+import { filteringByFlag } from "../../utils/helpers/filteringByFlag";
 import PropTypes from "prop-types";
 
 let CatsFavouritesContainer = ({
@@ -29,22 +31,18 @@ let CatsFavouritesContainer = ({
     true,
     "filtered-cats"
   );
+
   const toggleFilteredCats = () => {
     setValueFiltered(!valueFiltered);
   };
-  const changeTitle = () => {
-    return valueFiltered
-      ? "Показаны и простые и любимые кошки"
-      : "Показаны только любимые кошки";
-  };
 
-  const filteredCats = catsFavourites.filter((cat) => {
-    if (!valueFiltered) {
-      return cat.isFavourite === true;
-    }
+  const changedTitle = getValue(
+    valueFiltered,
+    "Показаны и простые и любимые кошки",
+    "Показаны только любимые кошки"
+  );
 
-    return cat;
-  });
+  const filteredCats = filteringByFlag(catsFavourites, !valueFiltered, true);
 
   return (
     <>
@@ -63,7 +61,7 @@ let CatsFavouritesContainer = ({
           <FilterCats
             valueFiltered={valueFiltered}
             toggleFilteredCats={toggleFilteredCats}
-            changeTitle={changeTitle}
+            changedTitle={changedTitle}
           />
           <Cats cats={filteredCats} />
         </>

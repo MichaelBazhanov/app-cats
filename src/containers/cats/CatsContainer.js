@@ -5,10 +5,12 @@ import Button from "../../components/Button";
 import Loading from "../../components/Loading";
 import Error from "../../components/Error";
 import CatsNo from "../../components/CatsNo";
-import PropTypes from "prop-types";
 import { getCats } from "../../modules/cats";
 import FilterCats from "../../components/FilterCats";
 import { useLocalStorage } from "./../../utils/hooks/useLocalStorage";
+import { getValue } from "../../utils/helpers/getValue";
+import { filteringByFlag } from "../../utils/helpers/filteringByFlag";
+import PropTypes from "prop-types";
 
 let CatsContainer = ({ cats, isLoading, error, getCats }) => {
   const firstLoadedCutsNumber = 10; // 15 // Первая загрузка
@@ -21,22 +23,18 @@ let CatsContainer = ({ cats, isLoading, error, getCats }) => {
     true,
     "filtered-cats"
   );
+
   const toggleFilteredCats = () => {
     setValueFiltered(!valueFiltered);
   };
-  const changeTitle = () => {
-    return valueFiltered
-      ? "Показаны и простые и любимые кошки"
-      : "Показаны только простые кошки";
-  };
 
-  const filteredCats = cats.filter((cat) => {
-    if (!valueFiltered) {
-      return cat.isFavourite === false;
-    }
+  const changedTitle = getValue(
+    valueFiltered,
+    "Показаны и простые и любимые кошки",
+    "Показаны только простые кошки"
+  );
 
-    return cat;
-  });
+  const filteredCats = filteringByFlag(cats, !valueFiltered, false);
 
   return (
     <>
@@ -55,7 +53,7 @@ let CatsContainer = ({ cats, isLoading, error, getCats }) => {
           <FilterCats
             valueFiltered={valueFiltered}
             toggleFilteredCats={toggleFilteredCats}
-            changeTitle={changeTitle}
+            changedTitle={changedTitle}
           />
           <Cats cats={filteredCats} />
         </>
